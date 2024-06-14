@@ -1,5 +1,10 @@
+import nextPWA from 'next-pwa';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    newNextLinkBehavior: true,
+  },
   reactStrictMode: false,
   transpilePackages: [
     'rc-util',
@@ -12,4 +17,8 @@ const nextConfig = {
   ],
 };
 
-export default nextConfig;
+export default nextPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+})(nextConfig);
