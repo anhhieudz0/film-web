@@ -87,7 +87,6 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
                   src={`http://img.ophim1.com/uploads/movies/${item.thumb_url}`}
                   alt="thumb"
                   className="max-w-20 h-full object-cover"
-                  loading="lazy"
                 />
                 <div className="p-2 flex flex-col justify-between">
                   <p>{item.name}</p>

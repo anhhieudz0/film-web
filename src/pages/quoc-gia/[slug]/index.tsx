@@ -87,6 +87,7 @@ const Country: NextPage = () => {
               style={{ color: "white" }}
               pageSize={24}
               current={page}
+              showSizeChanger={false}
             />
           )}
         </div>

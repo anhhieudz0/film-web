@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeaderTemplate from "../Header";
-import { Button, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import SliderShow from "@/components/common/SliderShow";
-import CustomPlayer from "@/components/common/CustomPlayer";
 import TitleWithSeeAll from "@/components/common/TitleWithSeeAll";
 import CardItem from "@/components/common/CardItem";
 import { Films, Item } from "@/types/films.type";
@@ -60,7 +59,7 @@ const HomeTemplate = () => {
               ))
             : _dummy.map((item, index) => (
                 <div key={index}>
-                  <Skeleton.Image active className="!w-full" />
+                  <Skeleton.Image active className="!w-full min-h-[280px]" />
                 </div>
               ))}
         </div>
@@ -79,7 +78,7 @@ const HomeTemplate = () => {
         {phimMoi && phimMoi?.items?.length > 0 ? (
           <SliderShow data={phimMoi?.items.slice(0, 5) as Item[]} />
         ) : (
-          <Skeleton.Image className="!w-full !h-[200px]" />
+          <Skeleton.Image active className="!w-full !h-[200px]" />
         )}
       </>
       <ListFilmSection

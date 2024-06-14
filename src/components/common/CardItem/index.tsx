@@ -13,7 +13,7 @@ const CardItem = (props: Props) => {
   const router = useRouter();
   return (
     <div
-      className="relative h-full rounded-md overflow-hidden group cursor-pointer shadow-sm shadow-green-50"
+      className="relative h-full min-h-[280px] rounded-md overflow-hidden group cursor-pointer shadow-sm shadow-green-50"
       onClick={() => {
         router.push("/" + data.slug);
       }}
@@ -24,11 +24,10 @@ const CardItem = (props: Props) => {
           defaultImageUrl
         }
         alt={data.name}
-        loading="lazy"
         className="object-cover h-full w-full md:group-hover:scale-125 transition duration-75"
         onError={(e) => {
           e.currentTarget.src = defaultImageUrl;
-          e.currentTarget.onerror = null; // Prevent infinite loop if default image also fails
+          e.currentTarget.onerror = null;
         }}
         onClick={() => {
           router.push("/" + data.slug);

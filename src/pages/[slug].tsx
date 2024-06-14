@@ -92,20 +92,21 @@ const Preview: NextPage = () => {
           <div
             className="relative"
             onClick={() => {
-              router.push(
-                `/xem-phim/${
-                  filmInfo?.slug
-                }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
-                  " #",
-                  "_"
-                )}&episode=${filmInfo?.episodes?.[0].server_data?.[0].name}`
-              );
+              if (filmInfo?.episodes?.[0].server_name)
+                router.push(
+                  `/xem-phim/${
+                    filmInfo?.slug
+                  }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
+                    " #",
+                    "_"
+                  )}&episode=${filmInfo?.episodes?.[0].server_data?.[0].name}`
+                );
             }}
           >
             <img
               src={`https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`}
               alt=""
-              className="w-full h-full object-cover"
+              className="w-full min-h-[242px] md:min-h-[675px] object-cover"
               onError={(e) => {
                 e.currentTarget.src = "/images/poster-default.jpg";
                 e.currentTarget.onerror = null; // Prevent infinite loop if default image also fails
@@ -129,16 +130,17 @@ const Preview: NextPage = () => {
                           behavior: "smooth",
                         });
                     } else {
-                      router.push(
-                        `/xem-phim/${
-                          filmInfo?.slug
-                        }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
-                          " #",
-                          "_"
-                        )}&episode=${
-                          filmInfo?.episodes?.[0].server_data?.[0].name
-                        }`
-                      );
+                      if (filmInfo?.episodes?.[0].server_name)
+                        router.push(
+                          `/xem-phim/${
+                            filmInfo?.slug
+                          }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
+                            " #",
+                            "_"
+                          )}&episode=${
+                            filmInfo?.episodes?.[0].server_data?.[0].name
+                          }`
+                        );
                     }
                   }}
                 >

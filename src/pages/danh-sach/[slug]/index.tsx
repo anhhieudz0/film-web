@@ -54,7 +54,7 @@ const ListFilm: NextPage = () => {
       setPage(1);
     }
   }, [query]);
-
+  console.log(data?.items?.length);
   return (
     <>
       <HeaderTemplate
@@ -84,6 +84,7 @@ const ListFilm: NextPage = () => {
               style={{ color: "white" }}
               pageSize={24}
               current={page}
+              showSizeChanger={false}
             />
           )}
           {data?.items?.length === 0 && (

@@ -87,6 +87,7 @@ const Category: NextPage = () => {
               style={{ color: "white" }}
               pageSize={24}
               current={page}
+              showSizeChanger={false}
             />
           )}
           {data?.items?.length === 0 && (

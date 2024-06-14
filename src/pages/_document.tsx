@@ -5,7 +5,9 @@ import type { DocumentContext } from "next/document";
 
 const MyDocument = () => (
   <Html lang="en">
-    <Head />
+    <Head>
+      <title>Quýt phim</title>
+    </Head>
     <body>
       <Main />
       <NextScript />
