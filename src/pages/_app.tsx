@@ -6,6 +6,7 @@ import themeCustom from "../theme/themeConfig";
 import Layout from "@/components/layout";
 import { useRouter } from "next/router";
 import SplashScreen from "@/components/common/SplashScreen";
+import NotificationPrompt from "@/components/common/notifications";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [domLoaded, setDomLoaded] = useState(false);
@@ -22,7 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("/service-worker.js")
+        .register("/service.js")
         .then((registration) => {
           console.log("Service Worker registration successful:", registration);
         })
@@ -39,7 +40,8 @@ const App = ({ Component, pageProps }: AppProps) => {
           const registration = await navigator.serviceWorker.ready;
           const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: "your-application-server-key",
+            applicationServerKey:
+              "BFIptKH9SlSFzR7fa0mU-Eogtd728DT0Yq9msoNDFm7kxyLWdjlG4z15QJg7fV4c0v6-zDhbglB-rgHcZciLAkk",
           });
 
           await fetch("/api/subscribe", {
@@ -60,7 +62,6 @@ const App = ({ Component, pageProps }: AppProps) => {
     }
     subscribeToNotifications();
   }, []);
-
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     setIsLoading(false);
@@ -72,6 +73,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   // }
   return (
     <>
+      <NotificationPrompt />
       {domLoaded && (
         <ConfigProvider theme={{ ...themeCustom }}>
           <Layout>
