@@ -89,7 +89,7 @@ const Preview: NextPage = () => {
       />
       {data && <BreadCrumbComponent data={data?.breadCrumb as BreadCrumb[]} />}
       {data && (
-        <div className="w-full max-h-[675px] min-h-[675px] relative cursor-pointer">
+        <div className="w-full relative cursor-pointer">
           <div
             className="relative"
             onClick={() => {
