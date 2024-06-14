@@ -19,6 +19,48 @@ const App = ({ Component, pageProps }: AppProps) => {
     if (router && window) setTimeout(() => window.scrollTo({ top: 0 }), 0);
   }, [router]);
 
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log("Service Worker registration successful:", registration);
+        })
+        .catch((error) => {
+          console.log("Service Worker registration failed:", error);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    async function subscribeToNotifications() {
+      if ("serviceWorker" in navigator && "PushManager" in window) {
+        try {
+          const registration = await navigator.serviceWorker.ready;
+          const subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: "your-application-server-key",
+          });
+
+          await fetch("/api/subscribe", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(subscription),
+          });
+
+          console.log("Subscribed to push notifications.");
+        } catch (error) {
+          console.error("Failed to subscribe:", error);
+        }
+      } else {
+        console.warn("Push messaging is not supported.");
+      }
+    }
+    subscribeToNotifications();
+  }, []);
+
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     setIsLoading(false);
