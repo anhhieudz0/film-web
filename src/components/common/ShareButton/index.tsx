@@ -17,7 +17,12 @@ const ShareButton: React.FC<Props> = (props) => {
       try {
         await navigator.share({
           title: props?.title,
-          text: props?.text,
+          text: props?.text
+            ? props?.text
+                ?.replace("<p>", "")
+                ?.replace("</p>", "")
+                ?.slice(0, 100) + "..."
+            : "",
           url: window.location.href,
         });
       } catch (error) {}
