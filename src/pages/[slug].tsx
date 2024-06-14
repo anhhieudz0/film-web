@@ -1,6 +1,7 @@
 import HeaderTemplate from "@/components/Templates/Header";
 import BreadCrumbComponent from "@/components/common/Breadcumb";
 import CardItem from "@/components/common/CardItem";
+import ShareButton from "@/components/common/ShareButton";
 import FilmsService from "@/services/film.service";
 import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films, Item } from "@/types/films.type";
@@ -169,6 +170,10 @@ const Preview: NextPage = () => {
             </div>
           </div>
           <div className="text-white bg-[#252525] p-4 my-3">
+            <ShareButton
+              text={filmInfo?.content as string}
+              title={filmInfo?.name as string}
+            />
             {filmInfo?.episodes?.[0].server_data?.[0]?.link_m3u8 &&
               filmInfo?.episodes?.map((e, index) => (
                 <div key={index}>
