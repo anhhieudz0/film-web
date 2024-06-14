@@ -2,6 +2,7 @@ import HeaderTemplate from "@/components/Templates/Header";
 import BreadCrumbComponent from "@/components/common/Breadcumb";
 import CardItem from "@/components/common/CardItem";
 import CustomPlayer from "@/components/common/CustomPlayer";
+import ShareButton from "@/components/common/ShareButton";
 import FilmsService from "@/services/film.service";
 import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films, Item } from "@/types/films.type";
@@ -112,13 +113,17 @@ const WatchMovie: NextPage = () => {
             </div>
           )}
           <div className="text-white p-4 pb-0">
-            <Typography className="text-white text-2xl">
+            <Typography className="text-white text-2xl mb-1">
               {filmInfo?.name}{" "}
               {router.query?.episode?.includes("Full")
                 ? ""
                 : "tập " + router.query?.episode}
               {` (${filmInfo?.origin_name})`}
             </Typography>
+            <ShareButton
+              text={filmInfo?.content as string}
+              title={filmInfo?.name as string}
+            />
           </div>
           <div className="text-white bg-[#252525] p-4 my-3">
             {filmInfo?.episodes?.[0].server_data?.[0]?.link_m3u8 &&

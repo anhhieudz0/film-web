@@ -2,6 +2,7 @@
 
 import { Button } from "antd";
 import React, { useState } from "react";
+import { BsShare, BsShareFill } from "react-icons/bs";
 interface Props {
   title: string;
   text: string;
@@ -28,13 +29,15 @@ const ShareButton: React.FC<Props> = (props) => {
     <>
       {shareSupported ? (
         <Button
+          className="flex items-center gap-1"
+          type="primary"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             handleShare();
           }}
         >
-          Chia sẻ
+          <BsShareFill /> Chia sẻ
         </Button>
       ) : (
         <></>

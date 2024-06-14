@@ -166,14 +166,14 @@ const Preview: NextPage = () => {
                     Xem Trailer
                   </Button>
                 )}
+                <ShareButton
+                  text={filmInfo?.content as string}
+                  title={filmInfo?.name as string}
+                />
               </div>
             </div>
           </div>
           <div className="text-white bg-[#252525] p-4 my-3">
-            <ShareButton
-              text={filmInfo?.content as string}
-              title={filmInfo?.name as string}
-            />
             {filmInfo?.episodes?.[0].server_data?.[0]?.link_m3u8 &&
               filmInfo?.episodes?.map((e, index) => (
                 <div key={index}>
