@@ -1,8 +1,11 @@
 import HeaderTemplate from "@/components/Templates/Header";
+import BreadCrumbComponent from "@/components/common/Breadcumb";
 import CardItem from "@/components/common/CardItem";
+import FilterSearch from "@/components/common/FilterSearch";
 import FilmsService from "@/services/film.service";
+import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films } from "@/types/films.type";
-import { Pagination, Typography } from "antd";
+import { Empty, Pagination, Typography } from "antd";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -11,11 +14,16 @@ const ListFilm: NextPage = () => {
   const router = useRouter();
   const { query } = router;
   const [data, setData] = useState<Films>();
-  const [page, setPage] = useState<number>();
+  const [page, setPage] = useState<number>(1);
   const fetchData = async () => {
     try {
+      setData(undefined);
       const res = await FilmsService.getListFilm(query.slug as string, {
         page,
+        sort_field: query.sort_field as string,
+        category: query.category as string,
+        country: query.country as string,
+        year: query.year as string,
       });
       setData(res.data.data);
     } catch (error) {}
@@ -34,8 +42,11 @@ const ListFilm: NextPage = () => {
   }, [page]);
 
   const buildQueryParams = () => {
-    return `?page=${page}`;
+    return `?page=${page}&category=${query?.category || ""}&country=${
+      query?.country || ""
+    }&year=${query?.year || ""}&sort_field=${query?.sort_field || ""}`;
   };
+
   useEffect(() => {
     if (query.page) {
       setPage(Number(query.page));
@@ -53,6 +64,10 @@ const ListFilm: NextPage = () => {
         thumbnail={data?.seoOnPage.og_image[0] as string}
       />
       <div className="px-4 md:px-0 mt-4">
+        {data && (
+          <BreadCrumbComponent data={data?.breadCrumb as BreadCrumb[]} />
+        )}
+        {data && <FilterSearch />}
         <Typography className="text-xl text-green-500 font-semibold underline underline-offset-8 cursor-pointer hover:text-green-400">
           {data?.titlePage}
         </Typography>
@@ -62,13 +77,22 @@ const ListFilm: NextPage = () => {
           ))}
         </div>
         <div className="my-4 flex justify-center">
-          <Pagination
-            total={data?.params?.pagination?.totalItems}
-            onChange={(page) => setPage(page)}
-            style={{ color: "white" }}
-            pageSize={24}
-            current={page}
-          />
+          {data && data?.params?.pagination?.totalItems > 24 && (
+            <Pagination
+              total={data?.params?.pagination?.totalItems}
+              onChange={(page) => setPage(page)}
+              style={{ color: "white" }}
+              pageSize={24}
+              current={page}
+            />
+          )}
+          {data?.items?.length === 0 && (
+            <div className="flex flex-row justify-center items-center">
+              <Empty
+                description={<p className="!text-white">Không có dữ liệu</p>}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>

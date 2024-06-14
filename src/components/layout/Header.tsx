@@ -59,14 +59,14 @@ const Header = () => {
               content={
                 <div className="grid grid-cols-3 gap-5 rounded-lg shadow-lg">
                   {categories.map((c) => (
-                    <Link
+                    <a
                       onClick={() => window.document.body.click()}
                       key={c.slug}
                       href={`/the-loai/${c.slug}`}
                       className="!text-white text-center text-nowrap font-semibold hover:!text-green-400"
                     >
                       {c.name}
-                    </Link>
+                    </a>
                   ))}
                 </div>
               }
@@ -79,13 +79,13 @@ const Header = () => {
               content={
                 <div className="grid grid-cols-3 gap-5 rounded-lg shadow-lg">
                   {country.map((c) => (
-                    <Link
+                    <a
                       key={c.slug}
                       href={`/quoc-gia/${c.slug}`}
                       className="!text-white text-center text-nowrap font-semibold hover:!text-green-400"
                     >
                       {c.name}
-                    </Link>
+                    </a>
                   ))}
                 </div>
               }

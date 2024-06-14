@@ -11,7 +11,7 @@ export interface Params {
   sort_field: string;
   category: string;
   country: string;
-  year: number;
+  year: number | string;
   page: number;
   per: number;
 }

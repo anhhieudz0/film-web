@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import GoToTopButton from "../common/GoToTopBtn";
 const HEADER_HEIGHT = 64;
 const FOOTER_HEIGHT = 200;
 
@@ -38,6 +39,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
       <div style={{ width: "100%" }} ref={footerRef}>
         <Footer />
       </div>
+      <GoToTopButton />
     </div>
   );
 };

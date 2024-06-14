@@ -15,6 +15,11 @@ const theme: ThemeConfig = {
       colorPrimary: "#00b96b",
       algorithm: false,
     },
+    Breadcrumb: {
+      linkColor: "#97B2C8",
+      separatorColor: "#97B2C8",
+      lastItemColor: "#00b96b",
+    },
   },
 };
 

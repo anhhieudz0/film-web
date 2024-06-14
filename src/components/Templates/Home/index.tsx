@@ -70,10 +70,10 @@ const HomeTemplate = () => {
   return (
     <div>
       <HeaderTemplate
-        path="/"
-        thumbnail="/exhuma-quat-mo-trung-ma-thumb.jpg"
-        title=""
-        description="adasdasd"
+        path={phimMoi?.seoOnPage.og_url.slice(4) as string}
+        title={phimMoi?.seoOnPage.titleHead as string}
+        description={phimMoi?.seoOnPage.descriptionHead as string}
+        thumbnail={phimMoi?.seoOnPage.og_image[0] as string}
       />
       <>
         {phimMoi && phimMoi?.items?.length > 0 ? (

@@ -5,12 +5,12 @@ import FilterSearch from "@/components/common/FilterSearch";
 import FilmsService from "@/services/film.service";
 import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films } from "@/types/films.type";
-import { Pagination, Typography } from "antd";
+import { Empty, Pagination, Typography } from "antd";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const Country: NextPage = () => {
+const ListSearchFilm: NextPage = () => {
   const router = useRouter();
   const { query } = router;
   const [data, setData] = useState<Films>();
@@ -18,16 +18,14 @@ const Country: NextPage = () => {
   const fetchData = async () => {
     try {
       setData(undefined);
-      const res = await FilmsService.getListFilmByCountry(
-        query.slug as string,
-        {
-          page,
-          sort_field: query.sort_field as string,
-          category: query.category as string,
-          country: query.country as string,
-          year: query.year as string,
-        }
-      );
+      const res = await FilmsService.getSearchFilm({
+        keyword: query.slug as string,
+        page,
+        sort_field: query.sort_field as string,
+        category: query.category as string,
+        country: query.country as string,
+        year: query.year as string,
+      });
       setData(res.data.data);
     } catch (error) {}
   };
@@ -39,7 +37,7 @@ const Country: NextPage = () => {
 
   useEffect(() => {
     if (query.slug && page) {
-      const url = "/quoc-gia/" + query.slug + buildQueryParams();
+      const url = "/tim-kiem/" + query.slug + buildQueryParams();
       router.replace(url, url, { scroll: false, shallow: true });
     }
   }, [page]);
@@ -49,7 +47,6 @@ const Country: NextPage = () => {
       query?.country || ""
     }&year=${query?.year || ""}&sort_field=${query?.sort_field || ""}`;
   };
-
   useEffect(() => {
     if (query.page) {
       setPage(Number(query.page));
@@ -70,7 +67,6 @@ const Country: NextPage = () => {
         {data && (
           <BreadCrumbComponent data={data?.breadCrumb as BreadCrumb[]} />
         )}
-        {data && <FilterSearch />}
         <Typography className="text-xl text-green-500 font-semibold underline underline-offset-8 cursor-pointer hover:text-green-400">
           {data?.titlePage}
         </Typography>
@@ -89,9 +85,16 @@ const Country: NextPage = () => {
               current={page}
             />
           )}
+          {data?.items?.length === 0 && (
+            <div className="flex flex-row justify-center items-center">
+              <Empty
+                description={<p className="!text-white">Không có dữ liệu</p>}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
   );
 };
-export default Country;
+export default ListSearchFilm;

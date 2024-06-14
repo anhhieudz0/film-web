@@ -17,7 +17,7 @@ const SliderShow = (props: Props) => {
             data?.map((item) => (
               <div
                 key={item._id}
-                className="w-full md:max-h-[675px] md:min-h-[675px]  relative cursor-pointer"
+                className="w-full max-h-[242px] min-h-[242px] md:max-h-[675px] md:min-h-[675px]  relative cursor-pointer"
                 onClick={() => {
                   router.push(item.slug);
                 }}
@@ -29,6 +29,9 @@ const SliderShow = (props: Props) => {
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-3 bg-black bg-opacity-70  text-white  text-ellipsis overflow-hidden  text-3xl">
                   {item.name}
+                </div>
+                <div className="absolute top-0 left-0 text-white p-1.5 bg-[#DE1A1F] text-sm rounded-br-lg">
+                  {item.lang} {item.quality}
                 </div>
               </div>
             ))}

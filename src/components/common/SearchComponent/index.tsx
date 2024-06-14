@@ -1,6 +1,6 @@
 // SearchComponent.tsx
 import React, { useState, useEffect } from "react";
-import { Empty, Input, Tag } from "antd";
+import { Empty, Input, Spin, Tag } from "antd";
 import { useDebounce } from "@/hooks/useDebounce";
 import FilmsService from "@/services/film.service";
 import { Item } from "@/types/films.type";
@@ -17,16 +17,20 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
   const debouncedSearch = useDebounce<string>(search, 500); // Delay 500ms
   const [items, setItems] = useState<Item[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const fetchItems = async () => {
     try {
+      setLoading(true);
       const response = await FilmsService.getSearchFilm({
         keyword: debouncedSearch,
       });
       setItems(response.data.data.items);
     } catch (error) {
       console.error("Error fetching items:", error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -45,7 +49,13 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
     <div className="relative">
       <Search
         placeholder="Tìm kiếm phim..."
-        onSearch={() => {}}
+        onSearch={() => {
+          if (search) {
+            router.push("/tim-kiem/" + search);
+            setIsFocused(false);
+            setSearch("");
+          }
+        }}
         onChange={(e) => handleSearch(e.target.value)}
         value={search}
         enterButton
@@ -57,12 +67,16 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
         }}
       />
       {isFocused && (
-        <div className="md:w-[450px] w-full absolute z-[9999] top-12 bg-[#111111] p-4 grid grid-cols-1 gap-3 rounded-b-md shadow-sm shadow-green-400 min-h-[70vh] max-h-[70vh] overflow-hidden overflow-y-scroll ">
+        <div
+          className={`md:w-[450px] w-full absolute !z-[999999] top-12 bg-[#111111] p-4 grid grid-cols-1 gap-3 rounded-b-md shadow-sm shadow-green-400 max-h-[70vh] overflow-hidden ${
+            !loading ? "overflow-y-scroll " : ""
+          }`}
+        >
           {items && items.length > 0 ? (
             items.map((item) => (
               <div
                 key={item._id}
-                className="flex rounded-md shadow-sm shadow-green-400 gap-2  overflow-hidden hover:shadow-green-500 hover:bg-gray-900 cursor-pointer"
+                className="flex rounded-md shadow-sm shadow-green-400 gap-2  max-h-[120px] overflow-hidden hover:shadow-green-500 hover:bg-gray-900 cursor-pointer"
                 onClick={() => {
                   router.push("/" + item.slug);
                   setIsFocused(false);
@@ -103,6 +117,11 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
               <Empty
                 description={<p className="!text-white">Không có dữ liệu</p>}
               />
+            </div>
+          )}
+          {loading && (
+            <div className="absolute flex items-center justify-center bg-white top-0 left-0 right-0 bottom-0 bg-opacity-60">
+              <Spin size="large" />
             </div>
           )}
         </div>

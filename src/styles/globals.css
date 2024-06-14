@@ -67,6 +67,14 @@ body {
       rgb(232, 232, 240) 63%) !important;
 }
 
+.ant-rate-star-zero .ant-rate-star-second {
+  color: #f1f1f1 !important;
+}
+
+.ant-rate-star-half .ant-rate-star-second {
+  color: #f1f1f1 !important;
+}
+
 .ant-pagination-item {
   background: #f1f1f1 !important;
   color: white !important;

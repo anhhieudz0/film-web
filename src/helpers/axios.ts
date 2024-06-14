@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 type ErrorResponse = {
   errors: string | Array<string>;
@@ -34,7 +35,8 @@ axios.interceptors.response.use(
     return response;
   },
   function (error: AxiosError<ErrorResponse>) {
-    error.message = "da co loi xay ra";
+    error.message = "đã có lỗi xảy ra";
+    window.location.reload();
     return Promise.reject(error);
   }
 );

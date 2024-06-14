@@ -17,7 +17,7 @@ const FilmsService = {
     axios.get<FilmsResponse>(FILMS_API.ListFilmByCategory(name), { params }),
   getListFilmByCountry: (name: string, params: Partial<Params>) =>
     axios.get<FilmsResponse>(FILMS_API.ListFilmByCountry(name), { params }),
-  getSearchFilm: (params: { keyword: string }) =>
+  getSearchFilm: (params: { keyword: string } & Partial<Params>) =>
     axios.get<FilmsResponse>(FILMS_API.Search, { params }),
   getFilmDetail: (name: string, params: Partial<Params>) =>
     axios.get<FilmsResponse>(FILMS_API.FilmDetails(name), { params }),
