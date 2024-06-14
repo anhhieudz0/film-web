@@ -23,7 +23,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
     <div>
       <div
         style={{ width: "100%" }}
-        className="sticky top-0 left-0 right-0 z-50"
+        className="!sticky !top-0 !left-0 !right-0 !z-50"
         ref={headerRef}
       >
         <Header />

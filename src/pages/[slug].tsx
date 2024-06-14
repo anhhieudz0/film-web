@@ -173,6 +173,10 @@ const Preview: NextPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+      {data && (
+        <>
           <div className="text-white bg-[#252525] p-4 my-3">
             {filmInfo?.episodes?.[0].server_data?.[0]?.link_m3u8 &&
               filmInfo?.episodes?.map((e, index) => (
@@ -310,7 +314,7 @@ const Preview: NextPage = () => {
                 ))}
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
