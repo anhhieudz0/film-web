@@ -13,6 +13,7 @@ const Header = () => {
     setDarkMode(!darkMode);
   };
   const router = useRouter();
+  
   return (
     <div
       className={
@@ -48,7 +49,7 @@ const Header = () => {
               Phim Lẻ
             </Link>
             <Link
-              href={"/danh-sach/shows"}
+              href={"/danh-sach/tv-shows"}
               className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
             >
               Shows
@@ -99,7 +100,7 @@ const Header = () => {
               Quốc gia <BsChevronDown />
             </Popover>
             <Link
-              href={"/danh-sach/sap-chieu"}
+              href={"/danh-sach/phim-sap-chieu"}
               className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
             >
               Sắp Chiếu

@@ -1,13 +1,45 @@
-self.addEventListener('push', async (event) => {
-  if (event.data) {
-    const eventData = await event.data.json()
-    showLocalNotification(eventData.title, eventData.body, self.registration)
-  }
-})
+/// <reference lib="webworker" />
 
-const showLocalNotification = (title, body, swRegistration) => {
-  swRegistration.showNotification(title, {
-    body,
-    icon: '/icons/icon-192.png',
-  })
-}
+self.addEventListener("notificationclick", (event) => {
+  event.preventDefault();
+
+  const notificationPayload = event.data;
+
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: "window",
+        includeUncontrolled: true,
+      })
+      .then(() => {
+        if (clients.openWindow) {
+          event.notification.close();
+          clients.openWindow(
+            notificationPayload?.url ?? `/`,
+          );
+          return;
+        }
+      })
+  );
+});
+
+self.addEventListener("push", (event) => {
+  if (!self.Notification || self.Notification.permission !== "granted") {
+    console.warn("通知が設定されていません");
+    return;
+  }
+
+  if (event.data) {
+    const data = JSON.parse(event.data.text());
+
+    event.waitUntil(
+      self.registration.showNotification(data.title, {
+        body: data.body,
+        ...data,
+        icon: data.icon,
+        image: data.image
+      })
+    );
+  }
+});
+

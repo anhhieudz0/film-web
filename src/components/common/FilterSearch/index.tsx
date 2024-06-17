@@ -115,7 +115,7 @@ const FilterSearch = () => {
             Phim Bộ Đang Chiếu
           </Select.Option>
           <Select.Option value="phim-bo-hoan-thanh">Phim Trọn Bộ</Select.Option>
-          <Select.Option value="sap-chieu">Phim Sắp Chiếu</Select.Option>
+          <Select.Option value="phim-sap-chieu">Phim Sắp Chiếu</Select.Option>
           <Select.Option value="subteam">Subteam</Select.Option>
         </Select>
       </div>
