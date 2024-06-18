@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import webPush from "web-push";
 import { loadSubscriptions, removeSubscriptions } from "@/utils/subscriptions";
 import { VAPIDKeys } from "@/utils/vapidKeys"; // Assuming you store VAPID keys securely
+import { Pool } from 'pg';
 
 // Configure web-push with VAPID keys
 const vapidKeys = VAPIDKeys; // Import your VAPID keys securely
@@ -10,9 +11,16 @@ webPush.setVapidDetails(
   vapidKeys.publicKey,
   vapidKeys.privateKey
 );
+const pool = new Pool({
+  connectionString: 'postgres://default:ay1Li7QKuCcI@ep-twilight-wave-a1sx6rxd.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require',
+  ssl: {
+      rejectUnauthorized: false,
+  },
+});
 
 type Subscription = {
   endpoint: string;
+  expirationTime: string | null;
   keys: {
     auth: string;
     p256dh: string;
@@ -43,7 +51,17 @@ export default async function handler(
 
   const notificationPayload: NotificationPayload = { notification };
 
-  let subscriptions: Subscription[] = loadSubscriptions();
+  const client = await pool.connect();
+  const result = await client.query<any>('SELECT endpoint, expiration_time as "expirationTime", p256dh, auth FROM subscriptions');
+  client.release();
+  const subscriptions: Subscription[] = result.rows.map((row:any) => ({
+    endpoint: row.endpoint,
+    expirationTime: row.expirationTime,
+    keys: {
+        p256dh: row.p256dh,
+        auth: row.auth
+    }
+}));
 
   // Filter out invalid subscriptions
   const validSubscriptions: Subscription[] = [];

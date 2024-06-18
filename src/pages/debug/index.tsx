@@ -8,6 +8,7 @@ import {
 } from "@/utils/service-worker";
 import dynamic from "next/dynamic";
 import { Button } from "antd";
+
 const Notifications = dynamic(
   () => import("@/components/common/notifications"),
   {
@@ -15,6 +16,10 @@ const Notifications = dynamic(
   }
 );
 export default function DebugActions() {
+// Ví dụ sử dụng biến môi trường trong file JS/TS
+console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
   return (
     <div className=" text-white flex flex-col items-center justify-center min-h-[100vh] gap-5">
       <Notifications />

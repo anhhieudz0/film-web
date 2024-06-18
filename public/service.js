@@ -3,7 +3,7 @@
 self.addEventListener("notificationclick", (event) => {
   event.preventDefault();
 
-  const notificationPayload = event.data;
+  const notificationPayload = event.notification.data;
 
   event.waitUntil(
     clients
@@ -35,11 +35,9 @@ self.addEventListener("push", (event) => {
     event.waitUntil(
       self.registration.showNotification(data.title, {
         body: data.body,
-        ...data,
-        icon: data.icon,
-        image: data.image
+        data,
+        icon: data.icon
       })
     );
   }
 });
-

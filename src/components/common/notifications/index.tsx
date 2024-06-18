@@ -6,7 +6,8 @@ import { resetServiceWorker } from "@/utils/service-worker";
 import styles from "./styles.module.css";
 import { Notice } from "./Notice";
 import { VAPIDKeys } from "@/utils/vapidKeys";
-import { Button } from "antd";
+import { Button, Modal, Typography } from "antd";
+import Router from "next/router";
 
 const notificationsSupported = () =>
   typeof window !== "undefined" &&
@@ -15,10 +16,9 @@ const notificationsSupported = () =>
   "PushManager" in window;
 
 export default function Notifications() {
-  const [permission, setPermission] = useState("default");
+  const [permission, setPermission] = useState("default" || window.Notification.requestPermission());
   const [isMounted, setIsMounted] = useState(false);
-
-  console.log("Notifications", notificationsSupported());
+  const [isOpen, setIsOpen] = useState(notificationsSupported);
   useEffect(() => {
     if (typeof window !== "undefined") {
       setPermission(window.Notification.permission);
@@ -46,19 +46,41 @@ export default function Notifications() {
 
     if (receivedPermission === "granted") {
       subscribe();
+      setIsOpen(false)
     }
   };
 
   return (
     <>
-      <Notice message={`Notifications permission status: ${permission}`} />
-      <Button
-        type="primary"
-        onClick={requestPermission}
-        className={styles.Button}
-      >
-        Request permission and subscribe
-      </Button>
+      {Router.pathname === "/" ? (
+        <Modal
+          open={isOpen && (permission !== "granted")}
+          onClose={() => setIsOpen(false)}
+          footer={false}
+          title={false}
+          className="text-center"
+        >
+          <Typography>{`Notifications permission status: ${permission}`}</Typography>
+          <Button
+            type="primary"
+            onClick={requestPermission}
+            className={styles.Button}
+          >
+            Request permission and subscribe
+          </Button>
+        </Modal>
+      ) : (
+        <>
+          <Notice message={`Notifications permission status: ${permission}`} />
+          <Button
+            type="primary"
+            onClick={requestPermission}
+            className={styles.Button}
+          >
+            Request permission and subscribe
+          </Button>
+        </>
+      )}
     </>
   );
 }
