@@ -16,11 +16,11 @@ const notificationsSupported = () =>
   "PushManager" in window;
 
 export default function Notifications() {
-  const [permission, setPermission] = useState("default" || window.Notification.requestPermission());
+  const [permission, setPermission] = useState("default");
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(notificationsSupported);
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.Notification) {
       setPermission(window.Notification.permission);
     }
     setIsMounted(true);
@@ -30,7 +30,7 @@ export default function Notifications() {
     return null; // Render nothing until the component is mounted
   }
 
-  if (!notificationsSupported()) {
+  if (!notificationsSupported() && Router.pathname !== "/") {
     return (
       <Notice message="Please install this app on your home screen first!" />
     );
@@ -46,7 +46,7 @@ export default function Notifications() {
 
     if (receivedPermission === "granted") {
       subscribe();
-      setIsOpen(false)
+      setIsOpen(false);
     }
   };
 
@@ -54,7 +54,7 @@ export default function Notifications() {
     <>
       {Router.pathname === "/" ? (
         <Modal
-          open={isOpen && (permission !== "granted")}
+          open={isOpen && permission !== "granted"}
           onClose={() => setIsOpen(false)}
           footer={false}
           title={false}
