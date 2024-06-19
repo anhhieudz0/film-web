@@ -41,10 +41,10 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
           "progress", // The progress bar and scrubber for playback and buffering
           "current-time", // The current time of playback
           "duration", // The full duration of the media
-          // "mute", // Toggle mute
+          "mute", // Toggle mute
           "volume", // Volume control
           "captions", // Toggle captions
-          // "settings", // Settings menu
+          "settings", // Settings menu
           "pip", // Picture-in-picture (currently Safari only)
           "airplay", // Airplay (currently Safari only)
           // "download", // Show a download button with a link to either the current source or a custom URL you specify in your options
@@ -121,7 +121,7 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
     <div className="video-container">
       <video
         ref={videoRef}
-        className="plyr__video-embed"
+        className="plyr__video-embed min-w-full"
         playsInline
         controls
         poster={poster || "/images/poster-default.jpg"} // Set poster image

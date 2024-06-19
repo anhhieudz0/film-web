@@ -77,7 +77,8 @@ export default async function handler(
         try {
           await webPush.sendNotification(
             sub,
-            JSON.stringify(notificationPayload.notification)
+            JSON.stringify(notificationPayload.notification),
+            { urgency: "high", TTL: 3600 }
           );
           validSubscriptions.push(sub);
         } catch (error: any) {

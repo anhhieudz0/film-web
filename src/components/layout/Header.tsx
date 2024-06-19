@@ -13,7 +13,7 @@ const Header = () => {
     setDarkMode(!darkMode);
   };
   const router = useRouter();
-  
+
   return (
     <div
       className={
@@ -27,7 +27,7 @@ const Header = () => {
               <img
                 src="/logo.png"
                 className="w-10 rounded-md cursor-auto"
-                onClick={() => router.push("/")}
+                onClick={() => router.push("/debug")}
               />
               <span className="text-xl font-bold bg-gradient-to-r from-[#48CFAD] via-[#dbc57c] to-[#DE1A1F] inline-block text-transparent bg-clip-text">
                 QuýtPhim
