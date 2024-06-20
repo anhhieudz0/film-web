@@ -9,7 +9,7 @@ interface Props {
 }
 const ShareButton: React.FC<Props> = (props) => {
   const [shareSupported, setShareSupported] = useState<boolean>(
-    typeof navigator.share !== "undefined"
+    typeof navigator.share !== "undefined",
   );
 
   const handleShare = async () => {

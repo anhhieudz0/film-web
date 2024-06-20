@@ -6,14 +6,39 @@ import ShareButton from "@/components/common/ShareButton";
 import FilmsService from "@/services/film.service";
 import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films, Item } from "@/types/films.type";
+import { SEOOnPage } from "@/types/seoOnPage.type";
 import { Rate, Tag, Typography } from "antd";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import ReactPlayer from "react-player";
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const { slug } = context.query;
+    // Fetch data from external API
+    const res = await fetch(
+      `${
+        process?.env?.NEXT_PUBLIC_FE_URL || "https://quytphim.vercel.app"
+      }/api/phim/${slug}.json`,
+    );
 
-const WatchMovie: NextPage = () => {
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data from API. Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    // Pass data to the page via props
+    return { props: { seo: data.data.seoOnPage } };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    // Return an empty object or handle the error as needed
+    return { props: {} };
+  }
+};
+const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
   const router = useRouter();
   const [data, setData] = useState<Films>();
   const [filmInfo, setFilmInfo] = useState<Item>();
@@ -24,7 +49,7 @@ const WatchMovie: NextPage = () => {
       setData(undefined);
       const data = await FilmsService.getFilmDetail(
         router.query.slug as string,
-        {}
+        {},
       );
       setData(data.data.data);
       const filmInfo = data.data.data.item;
@@ -34,10 +59,10 @@ const WatchMovie: NextPage = () => {
 
   const getRandomSlugPart = (
     breadCrumbArray: BreadCrumb[],
-    includeString: string
+    includeString: string,
   ) => {
     const filteredArray = breadCrumbArray.filter((breadCrumb) =>
-      breadCrumb.slug?.includes(includeString)
+      breadCrumb.slug?.includes(includeString),
     );
 
     if (filteredArray.length === 0) return null;
@@ -85,10 +110,10 @@ const WatchMovie: NextPage = () => {
         ?.find(
           (item) =>
             item.server_name ===
-            `${router.query?.sever_name}`?.replace("_", " #")
+            `${router.query?.sever_name}`?.replace("_", " #"),
         )
         ?.server_data?.find((s) => s.name === router.query?.episode),
-    [router.query, filmInfo]
+    [router.query, filmInfo],
   );
 
   return (
@@ -96,10 +121,10 @@ const WatchMovie: NextPage = () => {
       {filmInfo && (
         <div className="text-white">
           <HeaderTemplate
-            path={data?.seoOnPage.og_url.slice(4) as string}
-            title={data?.seoOnPage.titleHead as string}
-            description={data?.seoOnPage.descriptionHead as string}
-            thumbnail={data?.seoOnPage.og_image[0] as string}
+            path={`xem-${seo?.og_url}` as string}
+            title={seo?.titleHead as string}
+            description={seo?.descriptionHead as string}
+            thumbnail={seo?.og_image[0] as string}
           />
           {filmInfo && (
             <BreadCrumbComponent data={data?.breadCrumb as BreadCrumb[]} />
@@ -145,8 +170,8 @@ const WatchMovie: NextPage = () => {
                             filmInfo?.slug
                           }?sever_name=${e.server_name.replace(
                             " #",
-                            "_"
-                          )}&episode=${s.name}`
+                            "_",
+                          )}&episode=${s.name}`,
                         );
                       }}
                       className="min-w-10 text-center mb-3"

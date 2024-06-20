@@ -1,5 +1,3 @@
-import nextPWA from 'next-pwa';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -7,18 +5,16 @@ const nextConfig = {
   },
   reactStrictMode: false,
   transpilePackages: [
-    'rc-util',
-    '@ant-design',
-    'kitchen-flow-editor',
-    '@ant-design/pro-editor',
-    'zustand', 'leva', 'antd',
-    'rc-pagination',
-    'rc-picker'
+    "rc-util",
+    "@ant-design",
+    "kitchen-flow-editor",
+    "@ant-design/pro-editor",
+    "zustand",
+    "leva",
+    "antd",
+    "rc-pagination",
+    "rc-picker",
   ],
 };
 
-export default nextPWA({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-})(nextConfig);
+export default nextConfig;

@@ -7,13 +7,13 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   try {
     const queryParams: any = req.query;
 
     const url = `https://ophim16.cc/_next/data/Y8LCjUe8gNGFgL03cKgEY/tim-kiem.json?${new URLSearchParams(
-      queryParams
+      queryParams,
     )}`;
 
     const response = await fetch(url, {

@@ -9,7 +9,7 @@ const vapidKeys = VAPIDKeys; // Import your VAPID keys securely
 webPush.setVapidDetails(
   "mailto:manhhieua1@gmail.com",
   vapidKeys.publicKey,
-  vapidKeys.privateKey
+  vapidKeys.privateKey,
 );
 
 const pool = new Pool({
@@ -39,7 +39,7 @@ type NotificationPayload = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -56,7 +56,7 @@ export default async function handler(
   try {
     const client = await pool.connect();
     const result = await client.query<any>(
-      'SELECT endpoint, expiration_time as "expirationTime", p256dh, auth FROM subscriptions'
+      'SELECT endpoint, expiration_time as "expirationTime", p256dh, auth FROM subscriptions',
     );
     client.release();
 
@@ -78,7 +78,7 @@ export default async function handler(
           await webPush.sendNotification(
             sub,
             JSON.stringify(notificationPayload.notification),
-            { urgency: "high", TTL: 3600 }
+            { urgency: "high", TTL: 3600 },
           );
           validSubscriptions.push(sub);
         } catch (error: any) {
@@ -89,7 +89,7 @@ export default async function handler(
             console.error("Error sending notification:", error);
           }
         }
-      })
+      }),
     );
 
     if (invalidSubscriptions.length > 0) {

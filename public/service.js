@@ -14,12 +14,10 @@ self.addEventListener("notificationclick", (event) => {
       .then(() => {
         if (clients.openWindow) {
           event.notification.close();
-          clients.openWindow(
-            notificationPayload?.url ?? `/`,
-          );
+          clients.openWindow(notificationPayload?.url ?? `/`);
           return;
         }
-      })
+      }),
   );
 });
 
@@ -36,8 +34,8 @@ self.addEventListener("push", (event) => {
       self.registration.showNotification(data.title, {
         body: data.body,
         data,
-        icon: data.icon
-      })
+        icon: data.icon,
+      }),
     );
   }
 });

@@ -7,7 +7,6 @@ axios.defaults.timeout = 60000;
 axios.defaults.baseURL =
   "https://test.cors.workers.dev/https://ophim16.cc/_next/data/Y8LCjUe8gNGFgL03cKgEY";
 
-console.log(process.env);
 axios.interceptors.request.use(
   function (config: any) {
     config.headers["accept"] = "*/*";
@@ -27,7 +26,7 @@ axios.interceptors.request.use(
   function (error: AxiosError) {
     console.error(error);
     return Promise.reject(error);
-  }
+  },
 );
 
 axios.interceptors.response.use(
@@ -38,5 +37,5 @@ axios.interceptors.response.use(
     error.message = "đã có lỗi xảy ra";
     window.location.reload();
     return Promise.reject(error);
-  }
+  },
 );

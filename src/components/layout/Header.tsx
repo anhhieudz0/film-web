@@ -27,7 +27,7 @@ const Header = () => {
               <img
                 src="/logo.png"
                 className="w-10 rounded-md cursor-auto"
-                onClick={() => router.push("/debug")}
+                onClick={() => router.push("/")}
               />
               <span className="text-xl font-bold bg-gradient-to-r from-[#48CFAD] via-[#dbc57c] to-[#DE1A1F] inline-block text-transparent bg-clip-text">
                 QuýtPhim

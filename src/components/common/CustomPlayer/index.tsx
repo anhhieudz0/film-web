@@ -95,7 +95,7 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
 
           hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
             const span = document.querySelector(
-              ".plyr__menu__container [data-plyr='quality'][value='0'] span"
+              ".plyr__menu__container [data-plyr='quality'][value='0'] span",
             );
             if (span) {
               if (hls.autoLevelEnabled) {

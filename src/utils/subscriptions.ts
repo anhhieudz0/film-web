@@ -8,7 +8,7 @@ export function saveSubscription(subscription: any) {
   subscriptions.push(subscription);
   fs.writeFileSync(
     subscriptionsFilePath,
-    JSON.stringify(subscriptions, null, 2)
+    JSON.stringify(subscriptions, null, 2),
   );
 }
 
@@ -34,11 +34,11 @@ export function removeSubscriptions(invalidSubscriptions: any[]) {
   const updatedSubscriptions = currentSubscriptions.filter(
     (sub) =>
       !invalidSubscriptions.some(
-        (invalidSub) => sub.endpoint === invalidSub.endpoint
-      )
+        (invalidSub) => sub.endpoint === invalidSub.endpoint,
+      ),
   );
   fs.writeFileSync(
     subscriptionsFilePath,
-    JSON.stringify(updatedSubscriptions, null, 2)
+    JSON.stringify(updatedSubscriptions, null, 2),
   );
 }

@@ -1,14 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~plyr/dist/plyr.css';
-
+@import "~plyr/dist/plyr.css";
 
 html,
 body {
   padding: 0;
   margin: 0;
-  background: #1A1A1A;
+  background: #1a1a1a;
 }
 
 /* width */
@@ -28,43 +27,52 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #4ADE81;
+  background: #4ade81;
 }
 
-
 .ant-skeleton-title {
-  background-image: linear-gradient(90deg,
-      rgb(242, 245, 242) 25%,
-      rgb(228, 227, 227) 37%,
-      rgb(255, 255, 255) 63%) !important;
+  background-image: linear-gradient(
+    90deg,
+    rgb(242, 245, 242) 25%,
+    rgb(228, 227, 227) 37%,
+    rgb(255, 255, 255) 63%
+  ) !important;
 }
 
 .ant-skeleton-paragraph li {
-  background-image: linear-gradient(90deg,
-      rgb(242, 245, 242) 25%,
-      rgb(228, 227, 227) 37%,
-      rgb(255, 255, 255) 63%) !important;
+  background-image: linear-gradient(
+    90deg,
+    rgb(242, 245, 242) 25%,
+    rgb(228, 227, 227) 37%,
+    rgb(255, 255, 255) 63%
+  ) !important;
 }
 
 .ant-skeleton-avatar {
-  background-image: linear-gradient(90deg,
-      rgb(242, 245, 242) 25%,
-      rgb(228, 227, 227) 37%,
-      rgb(255, 255, 255) 63%) !important;
+  background-image: linear-gradient(
+    90deg,
+    rgb(242, 245, 242) 25%,
+    rgb(228, 227, 227) 37%,
+    rgb(255, 255, 255) 63%
+  ) !important;
 }
 
 .ant-skeleton-image {
-  background-image: linear-gradient(90deg,
-      rgb(242, 245, 242) 25%,
-      rgb(228, 227, 227) 37%,
-      rgb(255, 255, 255) 63%) !important;
+  background-image: linear-gradient(
+    90deg,
+    rgb(242, 245, 242) 25%,
+    rgb(228, 227, 227) 37%,
+    rgb(255, 255, 255) 63%
+  ) !important;
 }
 
 .ant-skeleton-input {
-  background-image: linear-gradient(90deg,
-      rgb(242, 245, 242) 25%,
-      rgb(228, 227, 227) 37%,
-      rgb(255, 255, 255) 63%) !important;
+  background-image: linear-gradient(
+    90deg,
+    rgb(242, 245, 242) 25%,
+    rgb(228, 227, 227) 37%,
+    rgb(255, 255, 255) 63%
+  ) !important;
 }
 
 .ant-rate-star-zero .ant-rate-star-second {
@@ -83,11 +91,11 @@ body {
 }
 
 .ant-pagination-item-active {
-  background-color: #4ADE81 !important;
-  color: #4ADE81 !important;
+  background-color: #4ade81 !important;
+  color: #4ade81 !important;
 }
 
-.ant-pagination-item-active>a {
+.ant-pagination-item-active > a {
   color: #fff !important;
 }
 

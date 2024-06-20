@@ -30,7 +30,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   // }
   const isDebug = useMemo(
     () => router.pathname === "/debug",
-    [router.pathname]
+    [router.pathname],
   );
   return (
     <>

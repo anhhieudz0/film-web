@@ -5,12 +5,50 @@ import FilterSearch from "@/components/common/FilterSearch";
 import FilmsService from "@/services/film.service";
 import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films } from "@/types/films.type";
+import { SEOOnPage } from "@/types/seoOnPage.type";
 import { Pagination, Typography } from "antd";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    let path = "";
+    const resolvedUrl = context?.resolvedUrl?.replace(
+      "/quoc-gia/",
+      "/api/quoc-gia/",
+    );
+    switch (true) {
+      case resolvedUrl?.includes("?"):
+        path = resolvedUrl?.replace("?", ".json?");
+        break;
 
-const Country: NextPage = () => {
+      default:
+        path = resolvedUrl + ".json";
+        break;
+    }
+    // Fetch data from external API
+    const res = await fetch(
+      `${
+        process?.env?.NEXT_PUBLIC_FE_URL || "https://quytphim.vercel.app"
+      }${path}`,
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data from API. Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    // Pass data to the page via props
+    return { props: { seo: data.data.seoOnPage } };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    // Return an empty object or handle the error as needed
+    return { props: {} };
+  }
+};
+const Country: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
   const router = useRouter();
   const { query } = router;
   const [data, setData] = useState<Films>();
@@ -26,7 +64,7 @@ const Country: NextPage = () => {
           category: query.category as string,
           country: query.country as string,
           year: query.year as string,
-        }
+        },
       );
       setData(res.data.data);
     } catch (error) {}
@@ -61,10 +99,10 @@ const Country: NextPage = () => {
   return (
     <>
       <HeaderTemplate
-        path={data?.seoOnPage.og_url.slice(4) as string}
-        title={data?.seoOnPage.titleHead as string}
-        description={data?.seoOnPage.descriptionHead as string}
-        thumbnail={data?.seoOnPage.og_image[0] as string}
+        path={seo?.og_url as string}
+        title={seo?.titleHead as string}
+        description={seo?.descriptionHead as string}
+        thumbnail={seo?.og_image[0] as string}
       />
       <div className="px-4 md:px-0 mt-4">
         {data && (
@@ -75,9 +113,7 @@ const Country: NextPage = () => {
           {data?.titlePage}
         </Typography>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mt-5">
-          {data?.items?.map((item) => (
-            <CardItem key={item._id} data={item} />
-          ))}
+          {data?.items?.map((item) => <CardItem key={item._id} data={item} />)}
         </div>
         <div className="my-4 flex justify-center">
           {data && data?.params?.pagination?.totalItems > 24 && (

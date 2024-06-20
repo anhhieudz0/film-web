@@ -20,7 +20,7 @@ export default function useNotification(callback?: NotificationCallback) {
         }
       } else {
         console.log(
-          "Notification permission already granted or not supported."
+          "Notification permission already granted or not supported.",
         );
       }
     };

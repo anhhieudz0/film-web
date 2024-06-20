@@ -34,7 +34,6 @@ const FilterSearch = () => {
   const onFilter = () => {
     if (query.slug) {
       const url = buildQueryParams();
-      console.log(url);
       router.replace(url, url, { scroll: false, shallow: true });
     }
   };
@@ -42,17 +41,17 @@ const FilterSearch = () => {
   const buildQueryParams = () => {
     const { type_slug, category, country, year, sort_field } = filter || {};
     const queryParams = [
-      { key: 'category', value: category },
-      { key: 'country', value: country },
-      { key: 'year', value: year },
-      { key: 'sort_field', value: sort_field }
+      { key: "category", value: category },
+      { key: "country", value: country },
+      { key: "year", value: year },
+      { key: "sort_field", value: sort_field },
     ];
-  
+
     const queryString = queryParams
-      .filter(param => param.value != null)
-      .map(param => `${param.key}=${param.value}`)
-      .join('&');
-  
+      .filter((param) => param.value != null)
+      .map((param) => `${param.key}=${param.value}`)
+      .join("&");
+
     return `/danh-sach/${type_slug}/?page=1&${queryString}`;
   };
 

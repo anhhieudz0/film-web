@@ -7,13 +7,12 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
   try {
     const url = `https://ophim16.cc/_next/data/Y8LCjUe8gNGFgL03cKgEY${req.url?.slice(
-      4
+      4,
     )}`;
-    console.log(url);
     const response = await fetch(url, {
       method: "GET",
       headers: {

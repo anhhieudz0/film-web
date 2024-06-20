@@ -5,15 +5,42 @@ import ShareButton from "@/components/common/ShareButton";
 import FilmsService from "@/services/film.service";
 import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films, Item } from "@/types/films.type";
+import { SEOOnPage } from "@/types/seoOnPage.type";
 import { Button, Rate, Tag, Typography } from "antd";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsPlayBtnFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
 
-const Preview: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const { slug } = context.query;
+    // Fetch data from external API
+    const res = await fetch(
+      `${
+        process?.env?.NEXT_PUBLIC_FE_URL || "https://quytphim.vercel.app"
+      }/api/phim/${slug}.json`,
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data from API. Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+
+    // Pass data to the page via props
+    return { props: { seo: data.data.seoOnPage } };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    // Return an empty object or handle the error as needed
+    return { props: {} };
+  }
+};
+
+const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
   const router = useRouter();
   const [data, setData] = useState<Films>();
   const [filmInfo, setFilmInfo] = useState<Item>();
@@ -24,7 +51,7 @@ const Preview: NextPage = () => {
       setData(undefined);
       const data = await FilmsService.getFilmDetail(
         router.query.slug as string,
-        {}
+        {},
       );
       setData(data.data.data);
       const filmInfo = data.data.data.item;
@@ -34,10 +61,10 @@ const Preview: NextPage = () => {
 
   const getRandomSlugPart = (
     breadCrumbArray: BreadCrumb[],
-    includeString: string
+    includeString: string,
   ) => {
     const filteredArray = breadCrumbArray.filter((breadCrumb) =>
-      breadCrumb.slug?.includes(includeString)
+      breadCrumb.slug?.includes(includeString),
     );
 
     if (filteredArray.length === 0) return null;
@@ -82,10 +109,10 @@ const Preview: NextPage = () => {
   return (
     <>
       <HeaderTemplate
-        path={data?.seoOnPage.og_url.slice(4) as string}
-        title={data?.seoOnPage.titleHead as string}
-        description={data?.seoOnPage.descriptionHead as string}
-        thumbnail={data?.seoOnPage.og_image[0] as string}
+        path={seo?.og_url.slice(4) as string}
+        title={seo?.titleHead as string}
+        description={seo?.descriptionHead as string}
+        thumbnail={seo?.og_image[0] as string}
       />
       {data && <BreadCrumbComponent data={data?.breadCrumb as BreadCrumb[]} />}
       {data && (
@@ -99,8 +126,8 @@ const Preview: NextPage = () => {
                     filmInfo?.slug
                   }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
                     " #",
-                    "_"
-                  )}&episode=${filmInfo?.episodes?.[0].server_data?.[0].name}`
+                    "_",
+                  )}&episode=${filmInfo?.episodes?.[0].server_data?.[0].name}`,
                 );
             }}
           >
@@ -137,10 +164,10 @@ const Preview: NextPage = () => {
                             filmInfo?.slug
                           }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
                             " #",
-                            "_"
+                            "_",
                           )}&episode=${
                             filmInfo?.episodes?.[0].server_data?.[0].name
-                          }`
+                          }`,
                         );
                     }
                   }}
@@ -197,8 +224,8 @@ const Preview: NextPage = () => {
                             filmInfo?.slug
                           }?sever_name=${e.server_name.replace(
                             " #",
-                            "_"
-                          )}&episode=${s.name}`
+                            "_",
+                          )}&episode=${s.name}`,
                         );
                       }}
                       className="min-w-10 text-center mb-3"

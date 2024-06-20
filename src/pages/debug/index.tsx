@@ -13,12 +13,12 @@ const Notifications = dynamic(
   () => import("@/components/common/notifications"),
   {
     ssr: false, // Make sure to render component client side to access window and Notification API's
-  }
+  },
 );
 export default function DebugActions() {
-// Ví dụ sử dụng biến môi trường trong file JS/TS
-console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
+  // Ví dụ sử dụng biến môi trường trong file JS/TS
+  console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+  console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
   return (
     <div className=" text-white flex flex-col items-center justify-center min-h-[100vh] gap-5">
