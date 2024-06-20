@@ -26,7 +26,7 @@ const Header = () => {
             <div className="flex gap-1 items-center m-auto">
               <img
                 src="/logo.png"
-                className="w-10 rounded-md cursor-auto"
+                className="w-10 rounded-md cursor-pointer"
                 onClick={() => router.push("/")}
               />
               <span className="text-xl font-bold bg-gradient-to-r from-[#48CFAD] via-[#dbc57c] to-[#DE1A1F] inline-block text-transparent bg-clip-text">

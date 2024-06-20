@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch(
       `${
         process?.env?.NEXT_PUBLIC_FE_URL || "https://quytphim.vercel.app"
-      }/api/phim/${slug}.json`,
+      }/api/phim/${slug}.json`
     );
 
     if (!res.ok) {
@@ -51,7 +51,7 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
       setData(undefined);
       const data = await FilmsService.getFilmDetail(
         router.query.slug as string,
-        {},
+        {}
       );
       setData(data.data.data);
       const filmInfo = data.data.data.item;
@@ -61,10 +61,10 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
 
   const getRandomSlugPart = (
     breadCrumbArray: BreadCrumb[],
-    includeString: string,
+    includeString: string
   ) => {
     const filteredArray = breadCrumbArray.filter((breadCrumb) =>
-      breadCrumb.slug?.includes(includeString),
+      breadCrumb.slug?.includes(includeString)
     );
 
     if (filteredArray.length === 0) return null;
@@ -126,8 +126,8 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                     filmInfo?.slug
                   }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
                     " #",
-                    "_",
-                  )}&episode=${filmInfo?.episodes?.[0].server_data?.[0].name}`,
+                    "_"
+                  )}&episode=${filmInfo?.episodes?.[0].server_data?.sort((a, b) => a.name.localeCompare(b.name))?.[0].name}`
                 );
             }}
           >
@@ -164,10 +164,12 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                             filmInfo?.slug
                           }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
                             " #",
-                            "_",
+                            "_"
                           )}&episode=${
-                            filmInfo?.episodes?.[0].server_data?.[0].name
-                          }`,
+                            filmInfo?.episodes?.[0].server_data?.sort((a, b) =>
+                              a.name.localeCompare(b.name)
+                            )?.[0].name
+                          }`
                         );
                     }
                   }}
@@ -215,26 +217,28 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                       {e.server_name}
                     </span>{" "}
                   </div>
-                  {e.server_data?.map((s) => (
-                    <Tag
-                      key={s.link_m3u8}
-                      onClick={() => {
-                        router.push(
-                          `/xem-phim/${
-                            filmInfo?.slug
-                          }?sever_name=${e.server_name.replace(
-                            " #",
-                            "_",
-                          )}&episode=${s.name}`,
-                        );
-                      }}
-                      className="min-w-10 text-center mb-3"
-                      // color="#4ADE81"
-                      bordered
-                    >
-                      {s.name}
-                    </Tag>
-                  ))}
+                  {e.server_data
+                    ?.sort((a, b) => a.name.localeCompare(b.name))
+                    ?.map((s) => (
+                      <Tag
+                        key={s.link_m3u8}
+                        onClick={() => {
+                          router.push(
+                            `/xem-phim/${
+                              filmInfo?.slug
+                            }?sever_name=${e.server_name.replace(
+                              " #",
+                              "_"
+                            )}&episode=${s.name}`
+                          );
+                        }}
+                        className="min-w-10 text-center mb-3"
+                        // color="#4ADE81"
+                        bordered
+                      >
+                        {s.name}
+                      </Tag>
+                    ))}
                 </div>
               ))}
           </div>

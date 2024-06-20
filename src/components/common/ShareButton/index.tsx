@@ -9,7 +9,7 @@ interface Props {
 }
 const ShareButton: React.FC<Props> = (props) => {
   const [shareSupported, setShareSupported] = useState<boolean>(
-    typeof navigator.share !== "undefined",
+    typeof navigator.share !== "undefined"
   );
 
   const handleShare = async () => {
@@ -17,12 +17,12 @@ const ShareButton: React.FC<Props> = (props) => {
       try {
         await navigator.share({
           title: props?.title,
-          text: props?.text
-            ? props?.text
-                ?.replace("<p>", "")
-                ?.replace("</p>", "")
-                ?.slice(0, 100) + "..."
-            : "",
+          // text: props?.text
+          //   ? props?.text
+          //       ?.replace("<p>", "")
+          //       ?.replace("</p>", "")
+          //       ?.slice(0, 100) + "..."
+          //   : "",
           url: window.location.href,
         });
       } catch (error) {}
