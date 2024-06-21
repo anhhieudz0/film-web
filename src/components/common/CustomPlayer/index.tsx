@@ -152,26 +152,26 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart }) => {
     }
   }, [url]);
 
-  useEffect(() => {
-    const handler = () => {
-      if (!videoRef.current) {
-        return;
-      }
-      const buttonElement = document.querySelector(
-        '[data-plyr="fullscreen"]'
-      ) as HTMLButtonElement;
+  // useEffect(() => {
+  //   const handler = () => {
+  //     if (!videoRef.current) {
+  //       return;
+  //     }
+  //     const buttonElement = document.querySelector(
+  //       '[data-plyr="fullscreen"]'
+  //     ) as HTMLButtonElement;
 
-      if (
-        buttonElement &&
-        window.matchMedia("(orientation: landscape)").matches &&
-        videoRef.current.currentTime > 0
-      ) {
-        buttonElement?.click();
-      }
-    };
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, [videoRef]);
+  //     if (
+  //       buttonElement &&
+  //       window.matchMedia("(orientation: landscape)").matches &&
+  //       videoRef.current.currentTime > 0
+  //     ) {
+  //       buttonElement?.click();
+  //     }
+  //   };
+  //   window.addEventListener("resize", handler);
+  //   return () => window.removeEventListener("resize", handler);
+  // }, [videoRef]);
 
   return (
     <div className="video-container relative">
@@ -187,6 +187,7 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart }) => {
         }}
         onEnded={(e) => {
           setIsShowNextPart(true);
+          localStorage.removeItem(`watchedTime_${url}`);
           if (document.fullscreenElement) {
             document.exitFullscreen().catch((err) => console.error(err));
           }
@@ -197,7 +198,7 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart }) => {
           className={`absolute top-2 right-2 opacity-0 transition duration-500 z-10 w-[170px] shadow-sm cursor-pointer ${true ? "opacity-100" : ""}`}
           onClick={(e) => {
             e.stopPropagation();
-            router.push(router);
+            router.push(nextPart?.path);
           }}
         >
           <img src={nextPart?.poster} alt="poster_url" loading="lazy" />
