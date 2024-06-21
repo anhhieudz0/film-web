@@ -157,7 +157,7 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                     ? {
                         path: `/xem-phim/${
                           filmInfo?.slug
-                        }?sever_name=${router?.query?.server_name}&episode=${nextPart?.name}`,
+                        }?sever_name=${router.query?.sever_name}&episode=${nextPart?.name}`,
                         poster: `https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`,
                         name: `Xem tập ${nextPart?.name}`,
                       }
