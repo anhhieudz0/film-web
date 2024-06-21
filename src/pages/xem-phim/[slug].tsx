@@ -139,7 +139,7 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
             </div>
           )}
           <div className="text-white p-4 pb-0">
-            <Typography className="text-white text-2xl mb-1">
+            <Typography className="!text-white !text-2xl !mb-1">
               {filmInfo?.name}{" "}
               {router.query?.episode?.includes("Full")
                 ? ""

@@ -19,6 +19,7 @@ const theme: ThemeConfig = {
       linkColor: "#97B2C8",
       separatorColor: "#97B2C8",
       lastItemColor: "#00b96b",
+      linkHoverColor: "#ffffff",
     },
   },
 };

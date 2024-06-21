@@ -142,7 +142,7 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
               }}
             />
             <div className="absolute bottom-0 left-0 p-2 ">
-              <Typography className="text-white text-2xl mb-2 ">
+              <Typography className="!text-white !text-2xl !mb-2 ">
                 {filmInfo?.name}
                 {` (${filmInfo?.origin_name})`}
               </Typography>
