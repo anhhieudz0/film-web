@@ -12,6 +12,10 @@ const MyDocument = () => (
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
       />
+      <meta
+        name="google-site-verification"
+        content="HJtex7fNTbrj0ovieUO1jatI_Vdz6dNLL8n-3os-zBI"
+      />
     </Head>
     <body>
       <Main />
