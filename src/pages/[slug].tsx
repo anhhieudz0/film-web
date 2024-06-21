@@ -121,15 +121,26 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
           <div
             className="relative"
             onClick={() => {
-              if (filmInfo?.episodes?.[0].server_name)
-                router.push(
-                  `/xem-phim/${
-                    filmInfo?.slug
-                  }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
-                    " #",
-                    "_"
-                  )}&episode=${filmInfo?.episodes?.[0].server_data?.sort((a, b) => Number(a.name) - Number(b.name))?.[0].name}`
-                );
+              if (!filmInfo?.episodes?.[0].server_data?.[0]?.link_m3u8) {
+                window &&
+                  document?.getElementById("trailer")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+              } else {
+                if (filmInfo?.episodes?.[0].server_name)
+                  router.push(
+                    `/xem-phim/${
+                      filmInfo?.slug
+                    }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
+                      " #",
+                      "_"
+                    )}&episode=${
+                      filmInfo?.episodes?.[0].server_data?.sort(
+                        (a, b) => Number(a.name) - Number(b.name)
+                      )?.[0].name
+                    }`
+                  );
+              }
             }}
           >
             <img

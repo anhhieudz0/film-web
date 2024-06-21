@@ -23,7 +23,6 @@ const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
-    console.log("window.scrollY", window.scrollY);
     const isVisible = prevScrollPos > currentScrollPos;
 
     setVisible(isVisible);

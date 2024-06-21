@@ -117,6 +117,23 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
     [router.query, filmInfo]
   );
 
+  const nextPart = useMemo(() => {
+    const server = filmInfo?.episodes?.find(
+      (item) =>
+        item.server_name === `${router.query?.sever_name}`?.replace("_", " #")
+    )?.server_data;
+
+    if (!server || !_infoWatch) return null;
+
+    const current_index = server.findIndex((s) => s.name === _infoWatch.name);
+
+    if (current_index === -1 || current_index + 1 >= server.length) {
+      return null; // Either not found or this is the last part
+    }
+
+    return server[current_index + 1];
+  }, [filmInfo, _infoWatch, router.query]);
+
   return (
     <>
       {filmInfo && (
@@ -135,6 +152,17 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
               <CustomPlayer
                 url={_infoWatch?.link_m3u8 as string}
                 poster={`https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`}
+                nextPart={
+                  !!nextPart
+                    ? {
+                        path: `/xem-phim/${
+                          filmInfo?.slug
+                        }?sever_name=${router?.query?.server_name}&episode=${nextPart?.name}`,
+                        poster: `https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`,
+                        name: `Xem tập ${nextPart?.name}`,
+                      }
+                    : undefined
+                }
               />
             </div>
           )}

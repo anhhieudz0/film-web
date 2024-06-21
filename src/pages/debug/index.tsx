@@ -13,13 +13,9 @@ const Notifications = dynamic(
   () => import("@/components/common/notifications"),
   {
     ssr: false, // Make sure to render component client side to access window and Notification API's
-  },
+  }
 );
 export default function DebugActions() {
-  // Ví dụ sử dụng biến môi trường trong file JS/TS
-  console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
-  console.log("DATABASE_URL:", process.env.DATABASE_URL);
-
   return (
     <div className=" text-white flex flex-col items-center justify-center min-h-[100vh] gap-5">
       <Notifications />
@@ -29,6 +25,13 @@ export default function DebugActions() {
       </Button>
       <Button type="primary" onClick={unregisterServiceWorkers}>
         Remove SW
+      </Button>
+      <h3 className={styles.heading}>Debug Storage</h3>
+      <Button type="primary" onClick={() => localStorage.clear()}>
+        Remove LocalStorage
+      </Button>
+      <Button type="primary" onClick={() => sessionStorage.clear()}>
+        Remove SessionStorage
       </Button>
       <Link href="/" className="bg-blue-500 px-4 py-1 rounded-md">
         Back to home

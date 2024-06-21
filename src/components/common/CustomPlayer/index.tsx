@@ -1,12 +1,15 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Plyr from "plyr";
 import Hls from "hls.js";
 import "plyr/dist/plyr.css";
+import { BsPlayCircle } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 interface Props {
   url: string;
   poster?: string; // Optional poster image URL
+  nextPart?: { poster?: string; name?: string; path: string };
 }
 
 declare global {
@@ -15,15 +18,25 @@ declare global {
   }
 }
 
-const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
+const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-
+  const [isShowNextPart, setIsShowNextPart] = useState<boolean>(false);
+  const router = useRouter();
   useEffect(() => {
     console.log("useEffect triggered");
 
     if (typeof window !== "undefined") {
       console.log("Running in browser environment");
+      const savedTime = localStorage.getItem(`watchedTime_${url}`);
 
+      if (savedTime) {
+        const shouldResume = window.confirm("Bạn có muốn tiếp tục xem không?");
+        if (shouldResume && videoRef.current) {
+          videoRef.current.currentTime = parseFloat(savedTime);
+        } else {
+          localStorage.removeItem(`watchedTime_${url}`);
+        }
+      }
       const video = videoRef.current;
       if (!video) {
         console.error("Video element not found");
@@ -119,13 +132,15 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
           });
 
           const player = new Plyr(video, defaultOptions);
-          player.on("controlshidden", () => {
-            const control = document.querySelector(
-              ".plyr__control--lights-off"
-            );
-            if (control) {
-              control.addEventListener("click", toggleLights);
-            }
+
+          // Save watched time to localStorage on time update
+          player.on("timeupdate", () => {
+            setIsShowNextPart(false);
+            video.currentTime > 0 &&
+              localStorage.setItem(
+                `watchedTime_${url}`,
+                video.currentTime.toString()
+              );
           });
         });
 
@@ -137,8 +152,29 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
     }
   }, [url]);
 
+  useEffect(() => {
+    const handler = () => {
+      if (!videoRef.current) {
+        return;
+      }
+      const buttonElement = document.querySelector(
+        '[data-plyr="fullscreen"]'
+      ) as HTMLButtonElement;
+
+      if (
+        buttonElement &&
+        window.matchMedia("(orientation: landscape)").matches &&
+        videoRef.current.currentTime > 0
+      ) {
+        buttonElement?.click();
+      }
+    };
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, [videoRef]);
+
   return (
-    <div className="video-container">
+    <div className="video-container relative">
       <video
         ref={videoRef}
         className="plyr__video-embed min-w-full"
@@ -149,7 +185,31 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
           const target = e.target as HTMLVideoElement;
           target.poster = "/images/poster-default.jpg";
         }}
+        onEnded={(e) => {
+          setIsShowNextPart(true);
+          if (document.fullscreenElement) {
+            document.exitFullscreen().catch((err) => console.error(err));
+          }
+        }}
       ></video>
+      {isShowNextPart && nextPart && (
+        <div
+          className={`absolute top-2 right-2 opacity-0 transition duration-500 z-10 w-[170px] shadow-sm cursor-pointer ${true ? "opacity-100" : ""}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(router);
+          }}
+        >
+          <img src={nextPart?.poster} alt="poster_url" loading="lazy" />
+          <span className="absolute bottom-0 left-0 right-0 p-1 pl-3 bg-slate-900 bg-opacity-75">
+            {nextPart?.name}
+          </span>
+          <BsPlayCircle
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  text-white bg-green-500 rounded-full"
+            size={30}
+          />
+        </div>
+      )}
     </div>
   );
 };
