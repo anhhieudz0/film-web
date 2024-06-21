@@ -31,48 +31,38 @@ body {
 }
 
 .ant-skeleton-title {
-  background-image: linear-gradient(
-    90deg,
-    rgb(242, 245, 242) 25%,
-    rgb(228, 227, 227) 37%,
-    rgb(255, 255, 255) 63%
-  ) !important;
+  background-image: linear-gradient(90deg,
+      rgb(242, 245, 242) 25%,
+      rgb(228, 227, 227) 37%,
+      rgb(255, 255, 255) 63%) !important;
 }
 
 .ant-skeleton-paragraph li {
-  background-image: linear-gradient(
-    90deg,
-    rgb(242, 245, 242) 25%,
-    rgb(228, 227, 227) 37%,
-    rgb(255, 255, 255) 63%
-  ) !important;
+  background-image: linear-gradient(90deg,
+      rgb(242, 245, 242) 25%,
+      rgb(228, 227, 227) 37%,
+      rgb(255, 255, 255) 63%) !important;
 }
 
 .ant-skeleton-avatar {
-  background-image: linear-gradient(
-    90deg,
-    rgb(242, 245, 242) 25%,
-    rgb(228, 227, 227) 37%,
-    rgb(255, 255, 255) 63%
-  ) !important;
+  background-image: linear-gradient(90deg,
+      rgb(242, 245, 242) 25%,
+      rgb(228, 227, 227) 37%,
+      rgb(255, 255, 255) 63%) !important;
 }
 
 .ant-skeleton-image {
-  background-image: linear-gradient(
-    90deg,
-    rgb(242, 245, 242) 25%,
-    rgb(228, 227, 227) 37%,
-    rgb(255, 255, 255) 63%
-  ) !important;
+  background-image: linear-gradient(90deg,
+      rgb(242, 245, 242) 25%,
+      rgb(228, 227, 227) 37%,
+      rgb(255, 255, 255) 63%) !important;
 }
 
 .ant-skeleton-input {
-  background-image: linear-gradient(
-    90deg,
-    rgb(242, 245, 242) 25%,
-    rgb(228, 227, 227) 37%,
-    rgb(255, 255, 255) 63%
-  ) !important;
+  background-image: linear-gradient(90deg,
+      rgb(242, 245, 242) 25%,
+      rgb(228, 227, 227) 37%,
+      rgb(255, 255, 255) 63%) !important;
 }
 
 .ant-rate-star-zero .ant-rate-star-second {
@@ -95,7 +85,7 @@ body {
   color: #4ade81 !important;
 }
 
-.ant-pagination-item-active > a {
+.ant-pagination-item-active>a {
   color: #fff !important;
 }
 
@@ -113,4 +103,29 @@ body {
 
 .ant-pagination-item-ellipsis {
   color: #f1f1f1 !important;
+}
+
+.plyr--full-ui .plyr__control--overlaid {
+  background-color: #4ade81 !important;
+}
+
+.plyr--full-ui .plyr__control--overlaid:hover {
+  background-color: #39e779 !important;
+}
+
+.plyr--full-ui input[type=range] {
+  color: #39e779 !important
+}
+
+.plyr--full-ui .plyr__controls__item .plyr__control:hover {
+  background-color: transparent !important;
+}
+
+
+.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]:before {
+  background: #05c74c !important
+}
+
+.plyr__controls button {
+  background: transparent !important;
 }

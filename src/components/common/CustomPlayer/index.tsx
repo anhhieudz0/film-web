@@ -34,7 +34,6 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
         fullscreen: { enabled: true, iosNative: true },
         controls: [
           "play-large", // The large play button in the center
-          // "restart", // Restart playback
           "rewind", // Rewind by the seek time (default 10 seconds)
           "play", // Play/pause playback
           "fast-forward", // Fast forward by the seek time (default 10 seconds)
@@ -47,8 +46,8 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
           "settings", // Settings menu
           "pip", // Picture-in-picture (currently Safari only)
           "airplay", // Airplay (currently Safari only)
-          // "download", // Show a download button with a link to either the current source or a custom URL you specify in your options
           "fullscreen", // Toggle fullscreen
+          "lights-off", // Custom button for turning off the lights
         ],
       };
 
@@ -65,10 +64,23 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
         }
       };
 
+      const toggleLights = () => {
+        const videoContainer = video.parentElement;
+        if (videoContainer) {
+          videoContainer.classList.toggle("lights-off");
+        }
+      };
+
       if (!Hls.isSupported()) {
         console.log("Hls not supported, using standard video source");
         video.src = url;
-        new Plyr(video, defaultOptions);
+        const player = new Plyr(video, defaultOptions);
+        player.on("controlshidden", () => {
+          const control = document.querySelector(".plyr__control--lights-off");
+          if (control) {
+            control.addEventListener("click", toggleLights);
+          }
+        });
       } else {
         console.log("Hls supported, initializing Hls.js");
         const hls = new Hls();
@@ -95,7 +107,7 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
 
           hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
             const span = document.querySelector(
-              ".plyr__menu__container [data-plyr='quality'][value='0'] span",
+              ".plyr__menu__container [data-plyr='quality'][value='0'] span"
             );
             if (span) {
               if (hls.autoLevelEnabled) {
@@ -106,7 +118,15 @@ const CustomPlayer: React.FC<Props> = ({ url, poster }) => {
             }
           });
 
-          new Plyr(video, defaultOptions);
+          const player = new Plyr(video, defaultOptions);
+          player.on("controlshidden", () => {
+            const control = document.querySelector(
+              ".plyr__control--lights-off"
+            );
+            if (control) {
+              control.addEventListener("click", toggleLights);
+            }
+          });
         });
 
         hls.attachMedia(video);

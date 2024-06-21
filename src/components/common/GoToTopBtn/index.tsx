@@ -32,8 +32,9 @@ const GoToTopButton: React.FC = () => {
         <Button
           type="primary"
           shape="circle"
+          size="large"
           onClick={scrollToTop}
-          className="fixed right-5 bottom-10 z-[99999] w-10 h-10 flex items-center justify-center shadow-md"
+          className="!fixed !right-5 bottom-10 z-[99999] w-10 h-10 flex items-center justify-center shadow-md"
         >
           <BsChevronDoubleUp size={20} className="font-semibold" />
         </Button>

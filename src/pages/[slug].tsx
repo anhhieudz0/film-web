@@ -7,6 +7,7 @@ import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films, Item } from "@/types/films.type";
 import { SEOOnPage } from "@/types/seoOnPage.type";
 import { Button, Rate, Tag, Typography } from "antd";
+import dayjs from "dayjs";
 import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -127,7 +128,7 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                   }?sever_name=${filmInfo?.episodes?.[0].server_name.replace(
                     " #",
                     "_"
-                  )}&episode=${filmInfo?.episodes?.[0].server_data?.sort((a, b) => a.name.localeCompare(b.name))?.[0].name}`
+                  )}&episode=${filmInfo?.episodes?.[0].server_data?.sort((a, b) => Number(a.name) - Number(b.name))?.[0].name}`
                 );
             }}
           >
@@ -166,8 +167,8 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                             " #",
                             "_"
                           )}&episode=${
-                            filmInfo?.episodes?.[0].server_data?.sort((a, b) =>
-                              a.name.localeCompare(b.name)
+                            filmInfo?.episodes?.[0].server_data?.sort(
+                              (a, b) => Number(a.name) - Number(b.name)
                             )?.[0].name
                           }`
                         );
@@ -218,7 +219,7 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                     </span>{" "}
                   </div>
                   {e.server_data
-                    ?.sort((a, b) => a.name.localeCompare(b.name))
+                    ?.sort((a, b) => Number(a.name) - Number(b.name))
                     ?.map((s) => (
                       <Tag
                         key={s.link_m3u8}
@@ -232,7 +233,7 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                             )}&episode=${s.name}`
                           );
                         }}
-                        className="min-w-10 text-center mb-3"
+                        className="min-w-10 text-center mb-3 hover:!bg-[#4ADE81] cursor-pointer"
                         // color="#4ADE81"
                         bordered
                       >
@@ -267,6 +268,12 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
             <p className="mb-1">
               Tình trạng:
               <span className="text-red-500"> {filmInfo?.episode_current}</span>
+            </p>
+            <p className="mb-1">
+              Ngày cập nhật:{" "}
+              <span className="text-green-500">
+                {dayjs(filmInfo?.modified?.time).format("DD-MM-YYYY HH:mm:ss")}
+              </span>
             </p>
             <p className="mb-1">
               Thời lượng:

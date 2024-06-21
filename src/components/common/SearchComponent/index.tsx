@@ -60,7 +60,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
         value={search}
         enterButton
         size="large"
-        className="md:w-96 w-[92vw]"
+        className="md:!w-96 !w-[92vw]"
         onFocus={() => setIsFocused(true)}
         onBlur={() => {
           setTimeout(() => setIsFocused(false), 100);

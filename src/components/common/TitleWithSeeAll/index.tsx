@@ -11,7 +11,7 @@ const TitleWithSeeAll = (props: Props) => {
   return (
     <div className="flex justify-between items-end ">
       <Typography
-        className="text-xl text-green-500 font-semibold underline underline-offset-8 cursor-pointer hover:text-green-400"
+        className="!text-xl !text-green-500 !font-semibold !underline !underline-offset-8 !cursor-pointer hover:text-green-400"
         onClick={() => {
           props.path && router.push(props.path);
         }}

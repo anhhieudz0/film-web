@@ -27,7 +27,7 @@ const SliderShow = (props: Props) => {
                   alt=""
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-black bg-opacity-70  text-white  text-ellipsis overflow-hidden  text-3xl">
+                <div className="!absolute bottom-0 left-0 !right-0 p-3 !bg-black !bg-opacity-70  !text-white  !text-ellipsis !overflow-hidden  md:!text-3xl !text-2xl">
                   {item.name}
                 </div>
                 <div className="absolute top-0 left-0 text-white p-1.5 bg-[#DE1A1F] text-sm rounded-br-lg">

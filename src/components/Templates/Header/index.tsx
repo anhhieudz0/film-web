@@ -15,15 +15,16 @@ const HeaderTemplate: FC<Props> = ({ thumbnail, description, title, path }) => {
   let thumbnailPath = "";
   switch (true) {
     case thumbnail?.includes("/uploads/movies/"):
-      thumbnailPath = thumbnail;
+      thumbnailPath = thumbnail?.replace("thumb.", "poster.");
       break;
 
     case thumbnail?.includes("movies/"):
-      thumbnailPath = "/uploads/" + thumbnail;
+      thumbnailPath = "/uploads/" + thumbnail?.replace("thumb.", "poster.");
       break;
 
     default:
-      thumbnailPath = "/uploads/movies/" + thumbnail;
+      thumbnailPath =
+        "/uploads/movies/" + thumbnail?.replace("thumb.", "poster.");
       break;
   }
   return (

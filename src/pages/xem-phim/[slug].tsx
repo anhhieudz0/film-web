@@ -8,6 +8,7 @@ import { BreadCrumb } from "@/types/breakCumb.type";
 import { Films, Item } from "@/types/films.type";
 import { SEOOnPage } from "@/types/seoOnPage.type";
 import { Rate, Tag, Typography } from "antd";
+import dayjs from "dayjs";
 import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -162,7 +163,7 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                     </span>{" "}
                   </div>
                   {e.server_data
-                    ?.sort((a, b) => a.name.localeCompare(b.name))
+                    ?.sort((a, b) => Number(a.name) - Number(b.name))
                     ?.map((s) => (
                       <Tag
                         key={s.link_m3u8}
@@ -176,7 +177,7 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                             )}&episode=${s.name}`
                           );
                         }}
-                        className="min-w-10 text-center mb-3"
+                        className="min-w-10 text-center mb-3 hover:!bg-[#4ADE81] cursor-pointer"
                         color={
                           router.query?.episode === s?.name &&
                           e.server_name.replace(" #", "_") ===
@@ -217,6 +218,12 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
             <p className="mb-1">
               Tình trạng:
               <span className="text-red-500"> {filmInfo?.episode_current}</span>
+            </p>
+            <p className="mb-1">
+              Ngày cập nhật:{" "}
+              <span className="text-green-500">
+                {dayjs(filmInfo?.modified?.time).format("DD-MM-YYYY HH:mm:ss")}
+              </span>
             </p>
             <p className="mb-1">
               Thời lượng:
