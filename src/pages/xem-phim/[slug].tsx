@@ -288,7 +288,7 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
             )}
           </div>
           <div className="text-white bg-[#252525] p-4 my-3">
-            <Typography className="text-xl text-green-500 font-semibold underline underline-offset-8 cursor-pointer hover:text-green-400">
+            <Typography className="!text-xl !text-green-500 !font-semibold !underline !underline-offset-8 !cursor-pointer hover:!text-green-400">
               {dataRecommend?.titlePage || "Phim liên quan"}
             </Typography>
             <div className="grid grid-cols-2 md:grid-cols-6 gap-5 mt-5">
