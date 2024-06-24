@@ -48,7 +48,9 @@ const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         style={{
           width: "100%",
           transition: "top 0.3s",
-          top: visible ? "0" : `-${headerRef?.current?.clientHeight}px`,
+          top: visible
+            ? "0"
+            : `-${Number(headerRef?.current?.clientHeight) + 2}px`,
         }}
         className="!sticky !left-0 !right-0 !z-50"
         ref={headerRef}

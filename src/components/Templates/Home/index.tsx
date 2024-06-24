@@ -42,7 +42,7 @@ const HomeTemplate = () => {
     title: any;
     path: any;
   }) => {
-    const _data = data?.items?.slice(0, 15);
+    const _data = data?.items;
     const _dummy = new Array(10).fill("");
     return (
       <div className="mt-8 px-4 md:px-0">
@@ -52,7 +52,6 @@ const HomeTemplate = () => {
             ? _data?.map((item, index) => (
                 <div
                   key={item._id}
-                  className={index === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
                 >
                   <CardItem data={item} />
                 </div>
