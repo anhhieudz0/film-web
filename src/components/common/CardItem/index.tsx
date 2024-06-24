@@ -9,7 +9,7 @@ interface Props {
 
 const CardItem = (props: Props) => {
   const { data } = props;
-  const defaultImageUrl = "/images/poster-default.jpg"; // Ensure this path is correct
+  const defaultImageUrl = "/images/card_image_default.jpg"; // Ensure this path is correct
   const router = useRouter();
   return (
     <div
@@ -23,8 +23,14 @@ const CardItem = (props: Props) => {
           `https://img.ophim.live/uploads/movies/${data.thumb_url}` ||
           defaultImageUrl
         }
+        style={{
+          backgroundImage:
+           `url(${defaultImageUrl})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
         alt={data.name}
-        className="object-cover h-full w-full md:group-hover:scale-125 transition duration-75"
+        className="object-cover h-full w-full md:group-hover:scale-125 transition duration-75 min-h-[300px]"
         onError={(e) => {
           e.currentTarget.src = defaultImageUrl;
           e.currentTarget.onerror = null;

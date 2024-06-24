@@ -21,6 +21,10 @@ const theme: ThemeConfig = {
       lastItemColor: "#00b96b",
       linkHoverColor: "#ffffff",
     },
+    Carousel:{
+      arrowSize:40,
+      arrowOffset:20
+    }
   },
 };
 

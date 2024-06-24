@@ -47,12 +47,12 @@ const HomeTemplate = () => {
     return (
       <div className="mt-8 px-4 md:px-0">
         <TitleWithSeeAll title={title} path={path} />
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mt-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-5">
           {_data?.length > 0
             ? _data?.map((item, index) => (
                 <div
                   key={item._id}
-                  className={index === 0 ? "col-span-2 md:row-span-2" : ""}
+                  className={index === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
                 >
                   <CardItem data={item} />
                 </div>
@@ -78,7 +78,7 @@ const HomeTemplate = () => {
         {phimMoi && phimMoi?.items?.length > 0 ? (
           <SliderShow data={phimMoi?.items.slice(0, 5) as Item[]} />
         ) : (
-          <Skeleton.Image active className="!w-full !h-[200px]" />
+          <Skeleton.Image active className="!w-full md:!h-[500px] !h-[200px]" />
         )}
       </>
       <ListFilmSection

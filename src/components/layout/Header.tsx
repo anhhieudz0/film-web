@@ -23,12 +23,11 @@ const Header = () => {
       <div className=" bg-white dark:bg-[#111111] text-black dark:text-white">
         <div className="max-w-[1364px] m-auto h-full flex flex-wrap items-center justify-between p-4 gap-5 m-w">
           <div className="flex flex-wrap gap-5">
-            <div className="flex gap-1 items-center m-auto">
-              <img
-                src="/logo.png"
-                className="w-10 rounded-md cursor-pointer"
-                onClick={() => router.push("/")}
-              />
+            <div
+              className="flex gap-1 items-center m-auto  cursor-pointer"
+              onClick={() => router.push("/")}
+            >
+              <img src="/logo.png" className="w-10 rounded-md" />
               <span className="text-xl font-bold bg-gradient-to-r from-[#48CFAD] via-[#dbc57c] to-[#DE1A1F] inline-block text-transparent bg-clip-text">
                 QuýtPhim
               </span>

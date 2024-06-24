@@ -17,7 +17,7 @@ const SliderShow = (props: Props) => {
             data?.map((item) => (
               <div
                 key={item._id}
-                className="w-full max-h-[242px] min-h-[242px] md:max-h-[675px] md:min-h-[675px]  relative cursor-pointer"
+                className="w-full max-h-[242px] min-h-[242px] md:max-h-[675px] md:min-h-[675px] relative cursor-pointer box-border"
                 onClick={() => {
                   router.push(item.slug);
                 }}
@@ -26,6 +26,12 @@ const SliderShow = (props: Props) => {
                   src={`https://img.ophim.live/uploads/movies/${item.poster_url}`}
                   alt=""
                   className="w-full h-full object-cover"
+                  style={{
+                    backgroundImage:
+                     `url(/images/poster-default.jpg)`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  }}
                 />
                 <div className="!absolute bottom-0 left-0 !right-0 p-3 !bg-black !bg-opacity-70  !text-white  !text-ellipsis !overflow-hidden  md:!text-3xl !text-2xl">
                   {item.name}

@@ -101,15 +101,15 @@ const ListFilm: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
         description={seo?.descriptionHead as string}
         thumbnail={seo?.og_image[0] as string}
       />
-      <div className="px-4 md:px-0 mt-4">
+      <div className="px-4 mt-4">
         {data && (
           <BreadCrumbComponent data={data?.breadCrumb as BreadCrumb[]} />
         )}
         {data && <FilterSearch />}
-        <Typography className="text-xl text-green-500 font-semibold underline underline-offset-8 cursor-pointer hover:text-green-400">
+        <Typography className="!text-xl !text-green-500 !font-semibold !underline !underline-offset-8 !cursor-pointer hover:!text-green-400">
           {data?.titlePage}
         </Typography>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mt-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-6 gap-3 mt-5">
           {data?.items?.map((item) => <CardItem key={item._id} data={item} />)}
         </div>
         <div className="my-4 flex justify-center">

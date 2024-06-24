@@ -19,6 +19,8 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const defaultImageUrl = "/images/card_image_default.jpg"; // Ensure this path is correct
+
 
   const fetchItems = async () => {
     try {
@@ -68,7 +70,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
       />
       {isFocused && (
         <div
-          className={`md:w-[450px] w-full absolute !z-[999999] top-12 bg-[#111111] p-4 grid grid-cols-1 gap-3 rounded-b-md shadow-sm shadow-green-400 max-h-[70vh] overflow-hidden ${
+          className={` w-full absolute !z-[999999] top-12 bg-[#111111] p-4 grid grid-cols-1 gap-3 rounded-b-md shadow-sm shadow-green-400 max-h-[70vh] overflow-hidden ${
             !loading ? "overflow-y-scroll " : ""
           }`}
         >
@@ -86,9 +88,19 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
                 <img
                   src={`http://img.ophim1.com/uploads/movies/${item.thumb_url}`}
                   alt="thumb"
-                  className="max-w-20 h-full object-cover"
+                  className="w-20 h-full object-cover"
+                  style={{
+                    backgroundImage:
+                     `url(${defaultImageUrl})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.src = defaultImageUrl;
+                    e.currentTarget.onerror = null;
+                  }}
                 />
-                <div className="p-2 flex flex-col justify-between">
+                <div className="p-2 flex flex-col justify-between text-sm">
                   <p>{item.name}</p>
                   <p>
                     Quốc gia: {item?.country?.map((c) => c.name)?.join(", ")}
@@ -96,18 +108,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
                   <p>
                     {item.time} | {item.quality} | {item.lang}
                   </p>
-                  <p>
-                    {item.category.map((c) => (
-                      <Tag
-                        id={c.id}
-                        color="#4ADE81"
-                        bordered
-                        className="text-[10px]"
-                      >
-                        {c.name}
-                      </Tag>
-                    ))}
-                  </p>
+                  <p>{item.category.slice(3).map((c) => c.name).join(" | ")}</p>
                 </div>
               </div>
             ))
