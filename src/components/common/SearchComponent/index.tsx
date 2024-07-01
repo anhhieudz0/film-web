@@ -5,6 +5,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import FilmsService from "@/services/film.service";
 import { Item } from "@/types/films.type";
 import { useRouter } from "next/router";
+import EnhancedButton from "../EnhancedButton";
 
 const { Search } = Input;
 
@@ -20,7 +21,6 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const defaultImageUrl = "/images/card_image_default.jpg"; // Ensure this path is correct
-
 
   const fetchItems = async () => {
     try {
@@ -76,41 +76,46 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
         >
           {items && items.length > 0 ? (
             items.map((item) => (
-              <div
-                key={item._id}
-                className="flex rounded-md shadow-sm shadow-green-400 gap-2  max-h-[120px] overflow-hidden hover:shadow-green-500 hover:bg-gray-900 cursor-pointer"
-                onClick={() => {
-                  router.push("/" + item.slug);
-                  setIsFocused(false);
-                  setSearch("");
-                }}
-              >
-                <img
-                  src={`http://img.ophim1.com/uploads/movies/${item.thumb_url}`}
-                  alt="thumb"
-                  className="w-20 h-full object-cover"
-                  style={{
-                    backgroundImage:
-                     `url(${defaultImageUrl})`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
+              <EnhancedButton key={item._id}>
+                <div
+                  className="flex rounded-md shadow-sm shadow-green-400 gap-2  max-h-[120px] overflow-hidden hover:shadow-green-500 hover:bg-gray-900 cursor-pointer"
+                  onClick={() => {
+                    router.push("/" + item.slug);
+                    setIsFocused(false);
+                    setSearch("");
                   }}
-                  onError={(e) => {
-                    e.currentTarget.src = defaultImageUrl;
-                    e.currentTarget.onerror = null;
-                  }}
-                />
-                <div className="p-2 flex flex-col justify-between text-sm">
-                  <p>{item.name}</p>
-                  <p>
-                    Quốc gia: {item?.country?.map((c) => c.name)?.join(", ")}
-                  </p>
-                  <p>
-                    {item.time} | {item.quality} | {item.lang}
-                  </p>
-                  <p>{item.category.slice(3).map((c) => c.name).join(" | ")}</p>
+                >
+                  <img
+                    src={`http://img.ophim1.com/uploads/movies/${item.thumb_url}`}
+                    alt="thumb"
+                    className="w-20 h-full object-cover"
+                    style={{
+                      backgroundImage: `url(${defaultImageUrl})`,
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.src = defaultImageUrl;
+                      e.currentTarget.onerror = null;
+                    }}
+                  />
+                  <div className="p-2 flex flex-col justify-between text-sm">
+                    <p>{item.name}</p>
+                    <p>
+                      Quốc gia: {item?.country?.map((c) => c.name)?.join(", ")}
+                    </p>
+                    <p>
+                      {item.time} | {item.quality} | {item.lang}
+                    </p>
+                    <p>
+                      {item.category
+                        .slice(3)
+                        .map((c) => c.name)
+                        .join(" | ")}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </EnhancedButton>
             ))
           ) : (
             <div className="flex flex-row justify-center items-center">
