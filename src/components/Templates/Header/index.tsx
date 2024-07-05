@@ -6,9 +6,16 @@ interface Props {
   description: string;
   title: string;
   path: string;
+  ico?: string;
 }
 
-const HeaderTemplate: FC<Props> = ({ thumbnail, description, title, path }) => {
+const HeaderTemplate: FC<Props> = ({
+  thumbnail,
+  description,
+  title,
+  path,
+  ico,
+}) => {
   const baseUrl = process.browser
     ? window.location.origin
     : process.env.NEXT_PUBLIC_BASE_URL || "";
@@ -29,7 +36,7 @@ const HeaderTemplate: FC<Props> = ({ thumbnail, description, title, path }) => {
   }
   return (
     <Head>
-      <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+      <link rel="shortcut icon" href={ico || "/favicon.ico"} type="image/png" />
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="revisit-after" content="1 days" />

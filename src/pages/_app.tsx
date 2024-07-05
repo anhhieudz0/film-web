@@ -29,7 +29,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   //   return <SplashScreen />;
   // }
   const isDebug = useMemo(
-    () => router.pathname === "/debug",
+    () => ["/debug","/xem-tv"].includes(router.pathname),
     [router.pathname]
   );
   return (

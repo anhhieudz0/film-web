@@ -5,7 +5,7 @@ type ErrorResponse = {
 };
 axios.defaults.timeout = 60000;
 axios.defaults.baseURL =
-  "https://test.cors.workers.dev/https://ophim16.cc/_next/data/Y8LCjUe8gNGFgL03cKgEY";
+  "https://test.cors.workers.dev/https://ophim16.cc/_next/data/j4bBHnWv9JD18kNQ3njRH";
 
 axios.interceptors.request.use(
   function (config: any) {

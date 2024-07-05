@@ -1,0 +1,91 @@
+[
+  {
+    "id": 0,
+    "title": "VTV1",
+    "url": "https://vcdn2.vtc.gov.vn:8443/GeoIP/vtc13_sd.smil/chunklist_w2059958889_b532000_sleng_tkdG9rZW5oYXNoPVNpbVJhRk5SNUFWSEUwTmo3SHBLbEE2WjVRRG9jOTZkLUVIVTA5VmFFcmVnQ05mNVRwdEs1MS1BSWNOUHozZm5FTFdkbk1OLXB6eDVSczh4b1RVZmF3PT0mdG9rZW5zdGFydHRpbWU9MTcyMDE1NDgyMiZ0b2tlbmVuZHRpbWU9MTcyMDE3NjQyMg==.m3u8",
+    "tvid": "vtv1hd",
+    "tvgroup": "❤| VTV",
+    "group-logo": "https://teohdtv.github.io/thumbs/Groups/VTV.png",
+    "tvlogo": "https://i.imgur.com/vZYlGIW.png"
+  },
+
+  {
+    "id": 100,
+    "title": "VOH FM 99.9MHz",
+    "url": "http://125.212.213.71:1935/live/channel3/playlist.m3u8",
+    "tvid": "r_voh99",
+    "tvgroup": "📻| Radio",
+    "group-logo": "https://i.imgur.com/IPNh4tM.png",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r_voh99.png",
+    "radio": "true"
+  },
+  {
+    "id": 101,
+    "title": "VOH FM 95.6MHz",
+    "url": "https://strm.voh.com.vn/radio/channel1/playlist.m3u8",
+    "tvid": "r_voh95",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r_voh95.png",
+    "radio": "true"
+  },
+  {
+    "id": 102,
+    "title": "VOH FM 87.7MHz",
+    "url": "https://strm.voh.com.vn/radio/channel5/chunklist_w1155830625.m3u8",
+    "tvid": "r_voh87",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r-voh87.png",
+    "radio": "true"
+  },
+  {
+    "id": 103,
+    "title": "VOH AM 610KHz",
+    "url": "https://strm.voh.com.vn/radio/channel2/playlist.m3u8",
+    "tvid": "r_voh610",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r_voh610.png",
+    "radio": "true"
+  },
+  {
+    "id": 104,
+    "title": "VOV GT HN",
+    "url": "https://str.vov.gov.vn/vovlive/vovGTHN.sdp_aac/playlist.m3u8",
+    "tvid": "r_vovgthn",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r_vovgthn.png",
+    "radio": "true"
+  },  {
+    "id": 105,
+    "title": "VOV GT HCM",
+    "url": "https://str.vov.gov.vn/vovlive/vovGTHCM.sdp_aac/playlist.m3u8",
+    "tvid": "r_vovgthcm",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r_vovgthcm.png",
+    "radio": "true"
+  },  {
+    "id": 106,
+    "title": "VOV Mekong FM 90Mhz",
+    "url": "https://str.vov.gov.vn/vovlive/vovgtMeKong.sdp_aac/playlist.m3u8",
+    "tvid": "r_vovmekong1",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r-vovmekong1.png",
+    "radio": "true"
+  },  {
+    "id": 107,
+    "title": "VOV Sức khỏe FM 89Mhz",
+    "url": "https://r4---sn-i3b7kn6s.c.2mdn.net/videoplayback/id/f8fdc1aa252a29e0/itag/347/source/web_video_ads/xpc/EgVovf3BOg%3D%3D/ctier/L/acao/yes/ip/0.0.0.0/ipbits/0/expire/1751686101/sparams/acao,ctier,expire,id,ip,ipbits,itag,mh,mip,mm,mn,ms,mv,mvi,pl,source,xpc/signature/6C338710B8E2854E3EBA47C29EBF1EDEAE525C8C.1C4C1910067C687DCDA6F64FF3A55B52D006B2DA/key/cms1/cms_redirect/yes/mh/P2/mip/118.70.129.224/mm/42/mn/sn-i3b7kn6s/ms/onc/mt/1720149397/mv/m/mvi/4/pl/24/file/file.mp4",
+    "tvid": "r_vovsuckhoe1",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r-vovsuckhoe1.png",
+    "radio": "true"
+  }, 
+   {
+    "id": 108,
+    "title": "VOV24/7 - FM 104MHz",
+    "url": "https://str.vov.gov.vn/vovlive/vov247.sdp_aac/playlist.m3u8",
+    "tvid": "r_vov247",
+    "tvgroup": "📻| Radio",
+    "tvlogo": "http://www.radiovietnamonline.com/img/vietnam/r_vov247.png",
+    "radio": "true"
+  }
+]

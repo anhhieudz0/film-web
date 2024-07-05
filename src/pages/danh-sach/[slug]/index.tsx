@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     let path = "";
     const resolvedUrl = context?.resolvedUrl?.replace(
       "/danh-sach/",
-      "/api/danh-sach/",
+      "/api/danh-sach/"
     );
     switch (true) {
       case resolvedUrl?.includes("?"):
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await fetch(
       `${
         process?.env?.NEXT_PUBLIC_FE_URL || "https://quytphim.vercel.app"
-      }${path}`,
+      }${path}`
     );
 
     if (!res.ok) {
