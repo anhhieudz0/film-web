@@ -12,7 +12,7 @@ export default async function handler(
   try {
     const queryParams: any = req.query;
 
-    const url = `https://ophim16.cc/_next/data/j4bBHnWv9JD18kNQ3njRH/tim-kiem.json?${new URLSearchParams(
+    const url = `https://ophim17.cc/_next/data/YjU3ELa3ICaBELMtMHUHj/tim-kiem.json?${new URLSearchParams(
       queryParams,
     )}`;
 

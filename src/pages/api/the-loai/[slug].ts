@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse<Data>,
 ) {
   try {
-    const url = `https://ophim16.cc/_next/data/j4bBHnWv9JD18kNQ3njRH${req.url?.slice(
+    const url = `https://ophim17.cc/_next/data/YjU3ELa3ICaBELMtMHUHj${req.url?.slice(
       4,
     )}`;
 
