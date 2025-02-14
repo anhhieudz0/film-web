@@ -163,6 +163,11 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
                       }
                     : undefined
                 }
+              title={
+                  router.query?.episode?.includes("Full")
+                    ? filmInfo?.name || ""
+                    : `${filmInfo?.name || ""} - Tập ${router.query?.episode}`
+                }
               />
             </div>
           )}
@@ -171,7 +176,7 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
               {filmInfo?.name}{" "}
               {router.query?.episode?.includes("Full")
                 ? ""
-                : "tập " + router.query?.episode}
+                : " - tập " + router.query?.episode}
               {` (${filmInfo?.origin_name})`}
             </Typography>
             <ShareButton

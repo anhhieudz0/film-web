@@ -10,6 +10,7 @@ interface Props {
   url: string;
   poster?: string; // Optional poster image URL
   nextPart?: { poster?: string; name?: string; path: string };
+  title?: string;
 }
 
 declare global {
@@ -18,10 +19,62 @@ declare global {
   }
 }
 
-const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart }) => {
+const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart, title }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isShowNextPart, setIsShowNextPart] = useState<boolean>(false);
   const router = useRouter();
+  useEffect(() => {
+    // Kiểm tra xem Media Session API có được hỗ trợ không
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        artwork: [
+          {
+            src: poster || "/images/poster-default.jpg",
+            sizes: "96x96",
+            type: "image/jpeg",
+          },
+          {
+            src: poster || "/images/poster-default.jpg",
+            sizes: "128x128",
+            type: "image/jpeg",
+          },
+          {
+            src: poster || "/images/poster-default.jpg",
+            sizes: "192x192",
+            type: "image/jpeg",
+          },
+          {
+            src: poster || "/images/poster-default.jpg",
+            sizes: "256x256",
+            type: "image/jpeg",
+          },
+          {
+            src: poster || "/images/poster-default.jpg",
+            sizes: "512x512",
+            type: "image/jpeg",
+          },
+        ],
+        title,
+      });
+
+      // Tùy chỉnh các hành động (play, pause)
+      navigator.mediaSession.setActionHandler(
+        "play",
+        () => videoRef.current && videoRef.current.play()
+      );
+      navigator.mediaSession.setActionHandler(
+        "pause",
+        () => videoRef.current && videoRef.current.pause()
+      );
+    }
+
+    return () => {
+      // Cleanup nếu cần thiết
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = null;
+      }
+    };
+  }, [videoRef.current]);
   useEffect(() => {
     console.log("useEffect triggered");
 
@@ -32,7 +85,11 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart }) => {
       if (savedTime) {
         const shouldResume = window.confirm("Bạn có muốn tiếp tục xem không?");
         if (shouldResume && videoRef.current) {
-          videoRef.current.currentTime = parseFloat(savedTime);
+          setTimeout(() => {
+            if (videoRef.current) {
+              videoRef.current.currentTime = parseFloat(savedTime);
+            }
+          }, 1000);
         } else {
           localStorage.removeItem(`watchedTime_${url}`);
         }
