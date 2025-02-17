@@ -95,7 +95,7 @@ const EnhancedButton: FC<Props> = ({
       ref={buttonRef}
     >
       <StyledButtonBody style={styleBody}>
-        {handleValue.showRipple && rippleElement()}
+        {/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && handleValue.showRipple && rippleElement()}
         {children}
       </StyledButtonBody>
     </StyledButtonRoot>
