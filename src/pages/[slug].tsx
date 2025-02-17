@@ -144,7 +144,7 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
             }}
           >
             <img
-              src={`https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`}
+              src={`https://ophim17.cc/_next/image?url=https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}&w=384&q=75`}
               alt=""
               className="w-full min-h-[242px] md:min-h-[675px] object-cover"
               onError={(e) => {

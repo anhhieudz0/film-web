@@ -151,14 +151,14 @@ const WatchMovie: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
             <div>
               <CustomPlayer
                 url={_infoWatch?.link_m3u8 as string}
-                poster={`https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`}
+                poster={`https://ophim17.cc/_next/image?url=https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}&w=384&q=75`}
                 nextPart={
                   !!nextPart
                     ? {
                         path: `/xem-phim/${
                           filmInfo?.slug
                         }?sever_name=${router.query?.sever_name}&episode=${nextPart?.name}`,
-                        poster: `https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}`,
+                        poster: `https://ophim17.cc/_next/image?url=https://img.ophim.live/uploads/movies/${filmInfo?.poster_url}&w=384&q=75`,
                         name: `Xem tập ${nextPart?.name}`,
                       }
                     : undefined

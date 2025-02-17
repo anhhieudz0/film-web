@@ -24,7 +24,7 @@ const SliderShow = (props: Props) => {
                   }}
                 >
                   <img
-                    src={`https://img.ophim.live/uploads/movies/${item.poster_url}`}
+                    src={`https://ophim17.cc/_next/image?url=https://img.ophim.live/uploads/movies/${item.poster_url}&w=384&q=75`}
                     alt=""
                     className="w-full h-full object-cover"
                     style={{

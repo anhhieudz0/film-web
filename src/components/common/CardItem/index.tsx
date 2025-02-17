@@ -22,7 +22,7 @@ const CardItem = (props: Props) => {
       >
         <img
           src={
-            `https://img.ophim.live/uploads/movies/${data.thumb_url}` ||
+            `https://ophim17.cc/_next/image?url=https://img.ophim.live/uploads/movies/${data.thumb_url}&w=192&q=75` ||
             defaultImageUrl
           }
           style={{

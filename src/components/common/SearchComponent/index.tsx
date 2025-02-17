@@ -86,7 +86,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
                   }}
                 >
                   <img
-                    src={`http://img.ophim1.com/uploads/movies/${item.thumb_url}`}
+                    src={`https://ophim17.cc/_next/image?url=https://img.ophim.live/uploads/movies/${item.thumb_url}&w=192&q=75`}
                     alt="thumb"
                     className="w-20 h-full object-cover"
                     style={{

@@ -47,13 +47,13 @@ const HeaderTemplate: FC<Props> = ({
       <meta name="twitter:description" content={description} />
       <meta
         name="twitter:image"
-        content={`http://img.ophim1.com${thumbnailPath}`}
+        content={`https://ophim17.cc/_next/image?url=http://img.ophim.live${thumbnailPath}&w=192&q=75`}
       />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta
         property="og:image"
-        content={`http://img.ophim1.com${thumbnailPath}`}
+        content={`https://ophim17.cc/_next/image?url=http://img.ophim.live${thumbnailPath}&w=192&q=75`}
       />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="quytphim.vercel.app" />
@@ -61,7 +61,7 @@ const HeaderTemplate: FC<Props> = ({
       <meta property="og:locale" content="vi_VN" />
       <meta itemProp="name" content={description} />
       <meta itemProp="description" content={description} />
-      <meta name="image" content={`http://img.ophim1.com${thumbnailPath}`} />
+      <meta name="image" content={`https://ophim17.cc/_next/image?url=http://img.ophim.live${thumbnailPath}&w=192&q=75`} />
       <link rel="canonical" href={`${baseUrl}${path}`} />
       <link rel="alternate" href={`${baseUrl}${path}`} hrefLang="vi-vn" />
       <link rel="manifest" href="/manifest.json" />
