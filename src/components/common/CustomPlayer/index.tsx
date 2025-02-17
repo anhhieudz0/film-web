@@ -55,6 +55,8 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart, title }) => {
           },
         ],
         title,
+        artist: "Quýt phim",
+        album: "Quýt phim",
       });
 
       // Tùy chỉnh các hành động (play, pause)
