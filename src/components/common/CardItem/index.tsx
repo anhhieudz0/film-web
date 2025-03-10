@@ -54,7 +54,7 @@ const CardItem = (props: Props) => {
             }}
           />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-3 bg-black bg-opacity-70  text-white  text-ellipsis overflow-hidden  ">
+        <div className="absolute bottom-0 left-0 right-0 px-3 py-1 bg-black bg-opacity-40  text-white  line-clamp-2">
           {data.name}
         </div>
         <div className="absolute top-0 left-0 text-white p-1.5 bg-[#DE1A1F] text-sm rounded-br-lg">

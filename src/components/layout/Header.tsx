@@ -15,14 +15,10 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <div
-      className={
-        true ? "dark h-full shadow-sm shadow-green-200" : "h-full shadow-md"
-      }
-    >
+    <div className={true ? "dark h-full shadow-sm" : "h-full shadow-md"}>
       <div className=" bg-white dark:bg-[#111111] text-black dark:text-white">
-        <div className="max-w-[1364px] m-auto h-full flex flex-wrap items-center justify-between p-4 gap-5 m-w">
-          <div className="flex flex-wrap gap-5">
+        <div className="max-w-[1364px] m-auto h-full flex flex-wrap items-center justify-between p-4 gap-3 m-w">
+          <div className="flex flex-wrap gap-3">
             <div
               className="flex gap-1 items-center m-auto  cursor-pointer"
               onClick={() => router.push("/")}
@@ -34,7 +30,7 @@ const Header = () => {
             </div>
             <SearchComponent />
           </div>
-          <div className="flex flex-wrap gap-5">
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link
               href={"/danh-sach/phim-bo"}
               className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
@@ -47,17 +43,18 @@ const Header = () => {
             >
               Phim Lẻ
             </Link>
-            <Link
-              href={"/danh-sach/tv-shows"}
-              className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
-            >
-              Shows
-            </Link>
+
             <Link
               href={"/danh-sach/hoat-hinh"}
               className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
             >
               Hoạt Hình
+            </Link>
+            <Link
+              href={"/danh-sach/phim-sap-chieu"}
+              className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
+            >
+              Sắp Chiếu
             </Link>
             <Popover
               className="flex gap-1 items-center dark:text-white text-nowrap font-semibold hover:!text-green-400"
@@ -99,17 +96,17 @@ const Header = () => {
               Quốc gia <BsChevronDown />
             </Popover>
             <Link
-              href={"/danh-sach/phim-sap-chieu"}
+              href={"/danh-sach/tv-shows"}
               className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
             >
-              Sắp Chiếu
+              Shows
             </Link>
-            <Link
+            {/* <Link
               href={"/danh-sach/subteam"}
               className="dark:text-white text-nowrap font-semibold hover:!text-green-400"
             >
               SubTeam
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

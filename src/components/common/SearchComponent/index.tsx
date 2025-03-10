@@ -1,5 +1,5 @@
 // SearchComponent.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Empty, Input, Spin, Tag } from "antd";
 import { useDebounce } from "@/hooks/useDebounce";
 import FilmsService from "@/services/film.service";
@@ -21,7 +21,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const defaultImageUrl = "/images/card_image_default.jpg"; // Ensure this path is correct
-
+  const searchRef = useRef<any>(null);
   const fetchItems = async () => {
     try {
       setLoading(true);
@@ -50,12 +50,13 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
   return (
     <div className="relative">
       <Search
+        ref={searchRef}
         placeholder="Tìm kiếm phim..."
         onSearch={() => {
           if (search) {
             router.push("/tim-kiem/" + search);
             setIsFocused(false);
-            setSearch("");
+            searchRef.current && searchRef.current?.blur();
           }
         }}
         onChange={(e) => handleSearch(e.target.value)}
@@ -67,6 +68,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
         onBlur={() => {
           setTimeout(() => setIsFocused(false), 100);
         }}
+        allowClear={true}
       />
       {isFocused && (
         <div
@@ -82,7 +84,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ apiEndpoint }) => {
                   onClick={() => {
                     router.push("/" + item.slug);
                     setIsFocused(false);
-                    setSearch("");
+                    searchRef.current && searchRef.current?.blur();
                   }}
                 >
                   <img

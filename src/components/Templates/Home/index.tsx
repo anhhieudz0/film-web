@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import HeaderTemplate from "../Header";
-import { Skeleton } from "antd";
-import SliderShow from "@/components/common/SliderShow";
 import TitleWithSeeAll from "@/components/common/TitleWithSeeAll";
 import CardItem from "@/components/common/CardItem";
 import { Films, Item } from "@/types/films.type";
 import FilmsService from "@/services/film.service";
+import SwiperSlider from "@/components/common/SwiperSlider";
 
 const HomeTemplate = () => {
   const [phimLe, setPhimLe] = useState<Films>();
@@ -43,24 +41,16 @@ const HomeTemplate = () => {
     path: any;
   }) => {
     const _data = data?.items;
-    const _dummy = new Array(10).fill("");
     return (
       <div className="mt-8 px-4 md:px-0">
-        <TitleWithSeeAll title={title} path={path} />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-5">
-          {_data?.length > 0
-            ? _data?.map((item, index) => (
-                <div
-                  key={item._id}
-                >
-                  <CardItem data={item} />
-                </div>
-              ))
-            : _dummy.map((item, index) => (
-                <div key={index}>
-                  <Skeleton.Image active className="!w-full min-h-[280px]" />
-                </div>
-              ))}
+        {_data?.length > 0 && <TitleWithSeeAll title={title} path={path} />}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-5 h-full">
+          {_data?.length > 0 &&
+            _data?.map((item) => (
+              <div key={item._id}>
+                <CardItem data={item} />
+              </div>
+            ))}
         </div>
       </div>
     );
@@ -74,11 +64,7 @@ const HomeTemplate = () => {
         thumbnail={phimMoi?.seoOnPage.og_image[0] as string}
       /> */}
       <>
-        {phimMoi && phimMoi?.items?.length > 0 ? (
-          <SliderShow data={phimMoi?.items.slice(0, 5) as Item[]} />
-        ) : (
-          <Skeleton.Image active className="!w-full md:!h-[500px] !h-[200px]" />
-        )}
+        <SwiperSlider data={phimMoi?.items.slice(0, 10) as Item[]} />
       </>
       <ListFilmSection
         data={phimMoi as Films}

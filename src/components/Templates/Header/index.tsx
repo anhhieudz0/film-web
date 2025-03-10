@@ -61,14 +61,17 @@ const HeaderTemplate: FC<Props> = ({
       <meta property="og:locale" content="vi_VN" />
       <meta itemProp="name" content={description} />
       <meta itemProp="description" content={description} />
-      <meta name="image" content={`https://ophim17.cc/_next/image?url=http://img.ophim.live${thumbnailPath}&w=192&q=75`} />
+      <meta
+        name="image"
+        content={`https://ophim17.cc/_next/image?url=http://img.ophim.live${thumbnailPath}&w=192&q=75`}
+      />
       <link rel="canonical" href={`${baseUrl}${path}`} />
       <link rel="alternate" href={`${baseUrl}${path}`} hrefLang="vi-vn" />
       <link rel="manifest" href="/manifest.json" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="apple-touch-icon" href="/logo.png" />
       <meta name="theme-color" content="#111111" />
-      
+
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <link
         rel="apple-touch-startup-image"

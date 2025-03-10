@@ -143,3 +143,25 @@ body {
 .ant-tabs-nav-list {
   padding: 0 10px;
 }
+
+
+.swiper-pagination-bullet {
+  width: 30px !important;
+  height: 30px !important;
+  border: 2px solid gray;
+  opacity: 1 !important;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet-active {
+  border: 2px solid #fff
+}
+
+.swiper {
+  overflow: inherit !important;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: var(--swiper-pagination-bottom, -38px) !important;
+}

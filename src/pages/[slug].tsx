@@ -153,10 +153,6 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
               }}
             />
             <div className="absolute bottom-0 left-0 p-2 ">
-              <Typography className="!text-white !text-2xl !mb-2 ">
-                {filmInfo?.name}
-                {` (${filmInfo?.origin_name})`}
-              </Typography>
               <div className="flex gap-2">
                 <Button
                   type="primary"
@@ -216,6 +212,12 @@ const Preview: NextPage<{ seo: SEOOnPage }> = ({ seo }) => {
           </div>
         </div>
       )}
+      <div className="px-3">
+        <Typography className="!text-white !text-2xl !mb-2 ">
+          {filmInfo?.name}
+          {filmInfo && ` (${filmInfo?.origin_name})`}
+        </Typography>
+      </div>
       {data && (
         <>
           <div className="text-white bg-[#252525] p-4 my-3">

@@ -85,8 +85,7 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart, title }) => {
       const savedTime = localStorage.getItem(`watchedTime_${url}`);
 
       if (savedTime) {
-        const shouldResume = window.confirm("Bạn có muốn tiếp tục xem không?");
-        if (shouldResume && videoRef.current) {
+        if (videoRef.current) {
           setTimeout(() => {
             if (videoRef.current) {
               videoRef.current.currentTime = parseFloat(savedTime);
@@ -121,6 +120,10 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart, title }) => {
           "fullscreen", // Toggle fullscreen
           "lights-off", // Custom button for turning off the lights
         ],
+        ads: {
+          enabled: true,
+          tagUrl: "",
+        },
       };
 
       const updateQuality = (newQuality: number) => {
@@ -211,26 +214,38 @@ const CustomPlayer: React.FC<Props> = ({ url, poster, nextPart, title }) => {
     }
   }, [url]);
 
-  // useEffect(() => {
-  //   const handler = () => {
-  //     if (!videoRef.current) {
-  //       return;
-  //     }
-  //     const buttonElement = document.querySelector(
-  //       '[data-plyr="fullscreen"]'
-  //     ) as HTMLButtonElement;
+  useEffect(() => {
+    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      const handler = () => {
+        if (!videoRef.current) return;
 
-  //     if (
-  //       buttonElement &&
-  //       window.matchMedia("(orientation: landscape)").matches &&
-  //       videoRef.current.currentTime > 0
-  //     ) {
-  //       buttonElement?.click();
-  //     }
-  //   };
-  //   window.addEventListener("resize", handler);
-  //   return () => window.removeEventListener("resize", handler);
-  // }, [videoRef]);
+        const rect = videoRef.current.getBoundingClientRect();
+        const isVisible = rect.top >= 0 && rect.left >= 0;
+
+        // Kiểm tra xem video có đang chạy hay không
+        const isPlaying =
+          !videoRef.current.paused &&
+          !videoRef.current.ended &&
+          videoRef.current.readyState > 2;
+        if (!isVisible || !isPlaying) return;
+
+        const buttonElement = document.querySelector(
+          '[data-plyr="fullscreen"]'
+        ) as HTMLButtonElement;
+
+        if (
+          buttonElement &&
+          window.matchMedia("(orientation: landscape)").matches &&
+          videoRef.current.currentTime > 0
+        ) {
+          buttonElement?.click();
+        }
+      };
+
+      window.addEventListener("resize", handler);
+      return () => window.removeEventListener("resize", handler);
+    }
+  }, [videoRef]);
 
   return (
     <div className="video-container relative">
