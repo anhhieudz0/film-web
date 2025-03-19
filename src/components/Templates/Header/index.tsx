@@ -39,6 +39,7 @@ const HeaderTemplate: FC<Props> = ({
       <link rel="shortcut icon" href={ico || "/favicon.ico"} type="image/png" />
       <title>{title}</title>
       <meta charSet="utf-8" />
+      <meta name="robots" content="index, follow" />
       <meta name="revisit-after" content="1 days" />
       <meta name="description" content={description} />
       <meta name="author" content="quytphim.vercel.app" />

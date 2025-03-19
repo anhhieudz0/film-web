@@ -1,25 +1,5 @@
 # *
 User-agent: *
-Disallow: /admin/
-
-# *
-User-agent: *
-Disallow: /login
-
-# *
-User-agent: *
-Disallow: /register
-
-# *
-User-agent: *
-Disallow: /private/
-
-# *
-User-agent: *
-Allow: /public/
-
-# *
-User-agent: *
 Allow: /
 
 # Host
@@ -27,5 +7,3 @@ Host: https://quytphim.vercel.app
 
 # Sitemaps
 Sitemap: https://quytphim.vercel.app/sitemap.xml
-Sitemap: https://quytphim.vercel.app/sitemap-0.xml
-Sitemap: https://quytphim.vercel.app/sitemap-1.xml

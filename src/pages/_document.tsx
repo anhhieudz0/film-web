@@ -8,14 +8,12 @@ const MyDocument = () => (
     <Head>
       <title>Quýt phim</title>
       <link rel="manifest" href="/manifest.json" />
-      <meta
-        name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-      />
+      <meta name="viewport" content="width=1400" />
       <meta
         name="google-site-verification"
         content="HJtex7fNTbrj0ovieUO1jatI_Vdz6dNLL8n-3os-zBI"
       />
+      <meta name="robots" content="index, follow" />
     </Head>
     <body>
       <Main />
